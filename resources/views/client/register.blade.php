@@ -4,6 +4,8 @@
 <div class="row register">
     <div class="col-sm-6 col-sm-offset-3 registerColumn">
 
+        <h2>Sign Up</h2>
+
         <form method="post" action="{{ action('RegisterController@store') }}">
             <div class="form-group">
                 <label for="email">Email:</label>

@@ -1,11 +1,44 @@
+body {
+    position: relative;
+    overflow-x: hidden;
+}
+body,
+html { height: 100%;}
+.nav .open > a, 
+.nav .open > a:hover, 
+.nav .open > a:focus {background-color: transparent;}
+
+.alertRow{
+    position: absolute;
+    z-index: 2;
+    top: 30px;
+    text-align: center;
+    width: 100%;
+
+    .alertCol{
+        width: 100%;
+        margin: 0 auto;
+    }
+}
+
 .container{
     margin: 0 !important;
     padding: 0 !important;
 
     .register{
         width: 100vw;
+        padding-top: 100px;
 
         .registerColumn{
+            margin: 0 auto;
+        }
+    }
+
+    .login{
+        width: 100vw;
+        padding-top: 100px;
+
+        .loginColumn{
             margin: 0 auto;
         }
     }
@@ -27,6 +60,35 @@
                 font-size: 16px;
                 color: #212121;
             }
+
+            #closePanel{
+                width: 20px;
+                position: absolute;
+                top: 20px;
+                font-size: 20px;
+                right: 20px;
+            }
+            #closePanel:hover{
+                color: #a7a7a7;
+            }
+        }
+    }
+
+    .welcome{
+        width: 100vw;
+        height: 100vh;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .profile{
+        width: 100vw;
+        padding-top: 100px;
+
+        .profileCol{
+            margin: 0 auto;
         }
     }
 }
@@ -35,15 +97,6 @@
 
 
 
-body {
-    position: relative;
-    overflow-x: hidden;
-}
-body,
-html { height: 100%;}
-.nav .open > a, 
-.nav .open > a:hover, 
-.nav .open > a:focus {background-color: transparent;}
 
 /*-------------------------------*/
 /*           Wrappers            */

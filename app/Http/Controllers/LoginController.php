@@ -9,28 +9,22 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Session;
 
-class RegisterController extends Controller
+class LoginController extends Controller
 {
     public function index()
     {
-        return view('client.register');
+        return view('client.login');
     }
 
     public function store(Request $request)
     {
         //create new user 
-        $body['name'] = Input::get('name');
-        $body['firstName'] = Input::get('firstName');
-        $body['lastName'] = Input::get('lastName');
         $body['email'] = Input::get('email');
-        $body['city'] = Input::get('city');
-        $body['country'] = Input::get('country');
-        $body['about'] = Input::get('about');
         $body['password'] = Input::get('password');
 
         $client = new \GuzzleHttp\Client();
         try{
-            $response = $client->request('POST', 'http://127.0.0.1:8080/api/register', [
+            $response = $client->request('POST', 'http://127.0.0.1:8080/api/login', [
                 'headers' => ['Content-Type' => 'application/json'],
                 'body' => json_encode($body)
             
@@ -38,9 +32,24 @@ class RegisterController extends Controller
         }catch (\Exception $e) {
             Session::flash('Error', "Something gone wrong. Please try again.");
             return Redirect::to('/index');
-        }    
+        }  
 
-        Session::flash('Success', "You sign up successfully.");
+        $token = json_decode($response->getBody());
+        $token = $token->success->token;
+
+        Session::put('token', $token);
+
+        //dd($token);
+
+        Session::flash('Success', "You sign in successfully.");
+
+        return Redirect::to('/index');
+    }
+
+    public function logout()
+    {
+        Session::forget('token');
+        Session::flash('Success', "You log out successfully.");
 
         return Redirect::to('/index');
     }

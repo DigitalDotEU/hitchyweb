@@ -9,7 +9,6 @@
 @endsection
 
 
-
 <script type="text/javascript">
 
     function addMapStyling(map) {

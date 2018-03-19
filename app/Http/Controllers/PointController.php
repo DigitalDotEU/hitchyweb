@@ -9,16 +9,11 @@ use Mapper;
 
 class PointController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         Mapper::map(53.381128999999990000, -1.470085000000040000,
             [
-                'eventAfterLoad' => 'MapLoaded();',
+                'eventAfterLoad' => '',
                 'eventBeforeLoad' => 'addMapStyling(map);'
             ]
         );
@@ -43,76 +38,16 @@ class PointController extends Controller
                                 $(\'.panel\').append(\'<p>' . $point['name'] . '</p>\');
                                 $(\'.panel\').append(\'<p>' . $point['description'] . '</p>\');
                                 $(\'.panel\').append(\'<p>Rating: ' . $rating . '</p>\');
-                                $(\'.panel\').append(\'<p>Safety: ' . $safety . '</p>\');'
+                                $(\'.panel\').append(\'<p>Safety: ' . $safety . '</p>\');
+                                $(\'.panel\').append(\'<div id="closePanel"><i class="fas fa-times"></i></div>\');
+                                $(\'#closePanel\').click(function(){ $(\'.panel\').css(\'display\', \'none\'); });
+                                '
             ]);
         }
     
-        return view('index');
+        $token = session(['token']);
+
+        return view('index')->with('token', $token);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

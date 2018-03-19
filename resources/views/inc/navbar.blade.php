@@ -13,9 +13,24 @@
         <li>
             <a href="{{url('/index')}}">Map</a>
         </li>
-        <li>
-            <a href="{{url('/register')}}">Register</a>
-        </li>
+
+        @if(!Session::get('token'))
+            <li>
+                <a href="{{url('/register')}}">Register</a>
+            </li>
+            <li>
+                <a href="{{url('/login')}}">Login</a>
+            </li>
+        @endif
+
+        @if(Session::get('token'))
+            <li>
+                <a href="{{url('/logout')}}">Logout</a>
+            </li>
+            <li>
+                <a href="{{url('/profile')}}">Profile</a>
+            </li>
+        @endif
     </ul>
 </nav>
 <!-- /#sidebar-wrapper -->
@@ -29,7 +44,7 @@
     </button>
 
 <div class="row-fluid alertRow">
-    <div class="col-sm-4 col-sm-offset-4 col-xs-8 col-xs-offset-2">
+    <div class="col-sm-4 col-sm-offset-4 col-xs-8 col-xs-offset-2 alertCol">
     
         @if (Session::has('Success'))
             <div class="alert alert-success" id="alert" role="alert">
