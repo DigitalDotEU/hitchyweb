@@ -47,6 +47,19 @@ html { height: 100%;}
         width: 100vw;
         height: 100vh;
 
+        .searchForm{
+            position: absolute;
+            z-index: 2;
+            width: 40%;
+            margin: 50px 30% 0 30%;
+
+            #location{
+                -webkit-box-shadow: 0px 0px 30px 4px rgba(0,0,0,0.35);
+                -moz-box-shadow: 0px 0px 30px 4px rgba(0,0,0,0.35);
+                box-shadow: 0px 0px 30px 4px rgba(0,0,0,0.35);
+            }
+        }
+
         .panel{
             width: 100vw;
             height: 300px;
@@ -94,10 +107,6 @@ html { height: 100%;}
 }
 
 
-
-
-
-
 /*-------------------------------*/
 /*           Wrappers            */
 /*-------------------------------*/
@@ -116,7 +125,7 @@ html { height: 100%;}
 
 #sidebar-wrapper {
     z-index: 1000;
-    position: absolute;
+    position: fixed;
     left: 185px;
     width: 0;
     height: 100%;

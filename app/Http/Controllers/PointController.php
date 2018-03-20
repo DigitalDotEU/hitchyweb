@@ -11,10 +11,11 @@ class PointController extends Controller
 {
     public function index()
     {
-        Mapper::map(53.381128999999990000, -1.470085000000040000,
+        Mapper::map(52.22977, 21.01178,
             [
                 'eventAfterLoad' => '',
-                'eventBeforeLoad' => 'addMapStyling(map);'
+                'eventBeforeLoad' => 'addMapStyling(map);',
+                'zoom' => 14 
             ]
         );
 
@@ -26,8 +27,8 @@ class PointController extends Controller
         foreach($res as $point){
             $lat = $point['lattitude'];
             $lng = $point['longitude'];
-            $rating = $point['ratingSumVotes']/$point['ratingNumVotes'];
-            $safety = $point['safetySumVotes']/$point['safetyNumVotes'];
+            $rating = round($point['ratingSumVotes']/$point['ratingNumVotes'], 2);
+            $safety = round($point['safetySumVotes']/$point['safetyNumVotes'], 2);
 
             Mapper::marker($lat, $lng,
             [

@@ -55,6 +55,18 @@ html {
   height: 100vh;
 }
 
+.container .map .searchForm {
+  position: absolute;
+  z-index: 2;
+  width: 40%;
+  margin: 50px 30% 0 30%;
+}
+
+.container .map .searchForm #location {
+  -webkit-box-shadow: 0px 0px 30px 4px rgba(0, 0, 0, 0.35);
+  box-shadow: 0px 0px 30px 4px rgba(0, 0, 0, 0.35);
+}
+
 .container .map .panel {
   width: 100vw;
   height: 300px;
@@ -124,7 +136,7 @@ html {
 
 #sidebar-wrapper {
   z-index: 1000;
-  position: absolute;
+  position: fixed;
   left: 185px;
   width: 0;
   height: 100%;
