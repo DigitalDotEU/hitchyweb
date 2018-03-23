@@ -32,9 +32,9 @@
                 <input type="text" class="form-control" id="county" name="country">
             </div>
             <div class="form-group">
-                    <label for="about">Bio:</label>
-                    <input type="text" class="form-control" id="about" name="about">
-                </div>
+                <label for="about">Bio:</label>
+                <input type="text" class="form-control" id="about" name="about">
+            </div>
             <div class="form-group">
                 <label for="pwd">Password:</label>
                 <input type="password" class="form-control" id="pwd" name="password">
@@ -42,7 +42,7 @@
 
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
-            <button type="submit" class="btn btn-default">Sign Up</button>  
+            <button type="submit" class="btn btn-default">Sign Up</button>
         </form>
 
     </div>

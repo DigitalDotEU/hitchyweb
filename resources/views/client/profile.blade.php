@@ -11,6 +11,6 @@
         <p>City: {{ $user_info->city }}</p>
         <p>Country: {{ $user_info->country }}</p>
     </div>
-    
+
 </div>
 @endsection

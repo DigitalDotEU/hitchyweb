@@ -12,18 +12,55 @@
     {!! Mapper::render() !!}
 
     <div class="panel"></div>
+    <div class="panel2">
+        <form id="addPointForm" method="post" action="{{ action('PointController@store') }}">
+            <div class="form-group">
+                <input type="text" class="form-control" id="pointName" name="pointName" placeholder="Point name">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" id="pointDescription" name="pointDescription" placeholder="Point description">
+            </div>
+            <div class="form-group" style="display: none;">
+                <input type="text" class="form-control" id="lattitude" name="lattitude" value="">
+            </div>
+            <div class="form-group" style="display: none;">
+                <input type="text" class="form-control" id="longitude" name="longitude" value="">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" id="rating" name="rating" placeholder="Your rating from 1 to 5, eg. 4.3">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" id="safety" name="safety" placeholder="Your safety rating from 1 to 5, eg. 4.3">
+            </div>
+            <input name="_token" type="hidden" value="{{ csrf_token() }}"/>
+            <button type="submit" class="btn btn-primary">Add point</button>
+        </form>
+
+        <div id="closePanel2">
+            <i class="fas fa-times"></i>
+        </div>
+                                    
+    </div>
+
+    <div class="btn btn-default" id="addPointBtn"><i class="fas fa-plus-circle"></i></div>
 
 </div>
 @endsection
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
 <script type="text/javascript">
-
     function addMapStyling(map) {
 
-        //var autocomplete = new google.maps.places.Autocomplete(document.getElementById('location'));
-        //map.setCenter(autocomplete.getPosition()); 
+        //close add new point panel
+        $('#closePanel2').click(function(){ 
+            $('.panel2').css('display', 'none'); 
+        });
 
+        //init geocoder
+        var geocoder = new google.maps.Geocoder();
+
+        /*search box autocomplete */
         var autocomplete = new google.maps.places.Autocomplete(document.getElementById('location'));
         autocomplete.bindTo('bounds', map);
 
@@ -36,8 +73,6 @@
           marker.setVisible(false);
           var place = autocomplete.getPlace();
           if (!place.geometry) {
-            // User entered the name of a Place that was not suggested and
-            // pressed the Enter key, or the Place Details request failed.
             window.alert("No details available for input: '" + place.name + "'");
             return;
           }
@@ -47,7 +82,7 @@
             map.fitBounds(place.geometry.viewport);
           } else {
             map.setCenter(place.geometry.location);
-            map.setZoom(17);  // Why 17? Because it looks good.
+            map.setZoom(17); 
           }
           marker.setPosition(place.geometry.location);
           marker.setVisible(false);
@@ -62,6 +97,69 @@
           }
         });
 
+        //add new point based on user click map position when user click on map-canvas-0
+        document.getElementById('map-canvas-0').onclick = function(){
+            //get cursor position on map 
+            $("#addPointBtn").css('display', 'block');
+
+            //when user click addPointBtn create draggable marker and update lat and lng when user drag marker, dont display plus button to prevent 
+            //creating few markers. display panel div to display data inside of that.
+            $( "#addPointBtn" ).click(function() {
+                var ctr = map.getCenter();
+                var lt = ctr.lat();
+                var lng = ctr.lng();
+
+                var myLatLng = {lat: lt, lng: lng};
+
+                $('#lattitude').val(lt);
+                $('#longitude').val(lng);
+
+                console.log(lt);
+                console.log(lng);
+
+                var marker = new google.maps.Marker({
+                    position: myLatLng,
+                    map: map,
+                    draggable: true,
+                });
+
+                var infowindow = new google.maps.InfoWindow({
+                    content: ""
+                });
+
+                //dragend marker, use geocodePosition-you get info about marker givng position
+                google.maps.event.addListener(marker, 'dragend', function() {
+                    //update inputs- lattitude and longitude, center map on dragged marker
+                    //geocodePosition(marker.getPosition());
+                    map.panTo(marker.getPosition()); 
+
+                    var markerPos = geocoder.geocode({
+                        latLng: marker.getPosition()
+
+                    }, function(responses) {
+                        if (responses && responses.length > 0) {
+                            //update position and value for lattitude and longitude of new point
+                            $('#lattitude').val(responses[0].geometry.location.lat());
+                            $('#longitude').val(responses[0].geometry.location.lng());
+
+                            console.log($('#lattitude').val());
+                            console.log($('#longitude').val());
+
+                            infowindow.setContent(responses[0].formatted_address);
+                        } else {
+                            console.log('Cannot determine address at this location.');
+                        }
+                    });
+                        
+                    //set marker current position adress to content of infowindow
+                    infowindow.open(map, marker);
+                });
+
+                $("#addPointBtn").css('display', 'none');
+                $(".panel2").css('display', 'block');
+            });
+        }
+        
 
         var options = {
             styles: [

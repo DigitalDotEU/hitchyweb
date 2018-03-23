@@ -18,7 +18,7 @@ class RegisterController extends Controller
 
     public function store(Request $request)
     {
-        //create new user 
+        //create new user
         $body['name'] = Input::get('name');
         $body['firstName'] = Input::get('firstName');
         $body['lastName'] = Input::get('lastName');
@@ -33,12 +33,13 @@ class RegisterController extends Controller
             $response = $client->request('POST', 'http://127.0.0.1:8080/api/register', [
                 'headers' => ['Content-Type' => 'application/json'],
                 'body' => json_encode($body)
-            
-            ]);   
+
+            ]);
         }catch (\Exception $e) {
+            
             Session::flash('Error', "Something gone wrong. Please try again.");
             return Redirect::to('/index');
-        }    
+        }
 
         Session::flash('Success', "You sign up successfully.");
 

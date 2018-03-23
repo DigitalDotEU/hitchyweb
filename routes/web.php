@@ -4,6 +4,8 @@ Route::get('/', 'WelcomeController@index');
 
 Route::get('/index', 'PointController@index');
 
+Route::resource('index', 'PointController');
+
 Route::get('/register', 'RegisterController@index');
 
 Route::resource('register', 'RegisterController');
