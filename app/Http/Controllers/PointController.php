@@ -9,6 +9,7 @@ use Mapper;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Session;
+use Validator;
 
 class PointController extends Controller
 {
@@ -35,6 +36,7 @@ class PointController extends Controller
                 $lng = $point['longitude'];
                 $rating = round($point['ratingSumVotes']/$point['ratingNumVotes'], 2);
                 $safety = round($point['safetySumVotes']/$point['safetyNumVotes'], 2);
+                $author = $point['author'];
     
                 Mapper::marker($lat, $lng,
                 [
@@ -47,6 +49,7 @@ class PointController extends Controller
                                     $(\'.panel\').append(\'<p>' . $point['description'] . '</p>\');
                                     $(\'.panel\').append(\'<p>Rating: ' . $rating . '</p>\');
                                     $(\'.panel\').append(\'<p>Safety: ' . $safety . '</p>\');
+                                    $(\'.panel\').append(\'<p>Created by: ' . $author . '</p>\');
                                     $(\'.panel\').append(\'<div id="closePanel"><i class="fas fa-times"></i></div>\');
                                     $(\'#closePanel\').click(function(){ $(\'.panel\').css(\'display\', \'none\'); });
                                     '
@@ -60,17 +63,30 @@ class PointController extends Controller
     }
 
     public function store(Request $request){
+
+        $validator = Validator::make($request->all(), [
+            'pointName' => 'required|max:255',
+            'pointDescription' => 'required|max:255',
+            'rating' => 'required|integer|between:1,5',
+            'safety' => 'required|integer|between:1,5'
+        ]);
+
+        if ($validator->fails()) {
+            Session::flash('Error', "You put wrong data. Please check your fields.");
+            return Redirect::to('/index');
+        }
         
         //get info from /index add new point and send that data with post request
-        $body['name'] = Input::get('pointName');
-        $body['description'] = Input::get('pointDescription');
-        $body['lattitude'] = Input::get('lattitude');
-        $body['longitude'] = Input::get('longitude');
-        $body['ratingSumVotes'] = Input::get('rating');
-        $body['safetySumVotes'] = Input::get('safety');
+        $body['name'] = $request->input('pointName');
+        $body['description'] = $request->input('pointDescription');
+        $body['lattitude'] = $request->input('lattitude');
+        $body['longitude'] = $request->input('longitude');
+        $body['ratingSumVotes'] = $request->input('rating');
+        $body['safetySumVotes'] = $request->input('safety');
         $body['ratingNumVotes'] = 1;
         $body['safetyNumVotes'] = 1;
         $body['submittedByAmin'] = 0;
+        $body['author'] = $token = Session::get('loggedInUser');;
 
         $client = new \GuzzleHttp\Client();
         try{
@@ -84,7 +100,7 @@ class PointController extends Controller
             return Redirect::to('/index');
         }
 
-        Session::flash('Success', "You added point. Nice job!");
+        Session::flash('Success', "You added point. It must by accepted by our team. Nice job!");
 
         return Redirect::to('/index');
     }

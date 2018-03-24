@@ -35,9 +35,13 @@ class LoginController extends Controller
         }
 
         $token = json_decode($response->getBody());
+
+        //save in session logged user email to user in created new point e.g. created by radoszszymon@gmail.com
+        $loggedInUser = $token->email;
         $token = $token->success->token;
 
         Session::put('token', $token);
+        Session::put('loggedInUser', $loggedInUser);
 
         //dd($token);
 

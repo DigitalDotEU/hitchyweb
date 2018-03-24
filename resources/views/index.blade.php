@@ -12,37 +12,54 @@
     {!! Mapper::render() !!}
 
     <div class="panel"></div>
-    <div class="panel2">
-        <form id="addPointForm" method="post" action="{{ action('PointController@store') }}">
-            <div class="form-group">
-                <input type="text" class="form-control" id="pointName" name="pointName" placeholder="Point name">
-            </div>
-            <div class="form-group">
-                <input type="text" class="form-control" id="pointDescription" name="pointDescription" placeholder="Point description">
-            </div>
-            <div class="form-group" style="display: none;">
-                <input type="text" class="form-control" id="lattitude" name="lattitude" value="">
-            </div>
-            <div class="form-group" style="display: none;">
-                <input type="text" class="form-control" id="longitude" name="longitude" value="">
-            </div>
-            <div class="form-group">
-                <input type="text" class="form-control" id="rating" name="rating" placeholder="Your rating from 1 to 5, eg. 4.3">
-            </div>
-            <div class="form-group">
-                <input type="text" class="form-control" id="safety" name="safety" placeholder="Your safety rating from 1 to 5, eg. 4.3">
-            </div>
-            <input name="_token" type="hidden" value="{{ csrf_token() }}"/>
-            <button type="submit" class="btn btn-primary">Add point</button>
-        </form>
 
-        <div id="closePanel2">
-            <i class="fas fa-times"></i>
+    <!-- display add new point only for logged in users -->
+    @if(Session::get('token'))
+        <div class="panel2">
+            <form id="addPointForm" method="post" action="{{ action('PointController@store') }}">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="pointName" name="pointName" placeholder="Point name">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="pointDescription" name="pointDescription" placeholder="Point description">
+                </div>
+                <div class="form-group" style="display: none;">
+                    <input type="text" class="form-control" id="lattitude" name="lattitude" value="">
+                </div>
+                <div class="form-group" style="display: none;">
+                    <input type="text" class="form-control" id="longitude" name="longitude" value="">
+                </div>
+                <div class="form-group">
+                    <label for="rating">Your average rate for that point from 1 to 5:</label>
+                    <select class="form-control" id="rating" name="rating">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="rating">Your safety rate for that point from 1 to 5:</label>
+                    <select class="form-control" id="safety" name="safety">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                </div>
+                <input name="_token" type="hidden" value="{{ csrf_token() }}"/>
+                <button type="submit" class="btn btn-primary">Add point</button>
+            </form>
+
+            <div id="closePanel2">
+                <i class="fas fa-times"></i>
+            </div>                           
         </div>
-                                    
-    </div>
 
-    <div class="btn btn-default" id="addPointBtn"><i class="fas fa-plus-circle"></i></div>
+        <div class="btn btn-default" id="addPointBtn"><i class="fas fa-plus-circle"></i></div>
+    @endif
 
 </div>
 @endsection
@@ -117,20 +134,21 @@
                 console.log(lt);
                 console.log(lng);
 
+                //after click add new point create draggable marker to work with
                 var marker = new google.maps.Marker({
                     position: myLatLng,
                     map: map,
                     draggable: true,
                 });
 
+                //int infowindow
                 var infowindow = new google.maps.InfoWindow({
                     content: ""
                 });
 
-                //dragend marker, use geocodePosition-you get info about marker givng position
+                //dragend marker, use geocoder to get info about marker
                 google.maps.event.addListener(marker, 'dragend', function() {
                     //update inputs- lattitude and longitude, center map on dragged marker
-                    //geocodePosition(marker.getPosition());
                     map.panTo(marker.getPosition()); 
 
                     var markerPos = geocoder.geocode({
@@ -138,13 +156,14 @@
 
                     }, function(responses) {
                         if (responses && responses.length > 0) {
-                            //update position and value for lattitude and longitude of new point
+                            //update position and value for lattitude and longitude of new point inputs
                             $('#lattitude').val(responses[0].geometry.location.lat());
                             $('#longitude').val(responses[0].geometry.location.lng());
 
                             console.log($('#lattitude').val());
                             console.log($('#longitude').val());
 
+                            //set content of infowindow to address easy to understand for humans and programmers e.g. woloska 65, Warszawa ... 
                             infowindow.setContent(responses[0].formatted_address);
                         } else {
                             console.log('Cannot determine address at this location.');

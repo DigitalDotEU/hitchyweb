@@ -53,11 +53,18 @@
         @endif
 
         @if (Session::has('Error'))
-            <div class="alert alert-danger " id="alert" role="alert">
+            <div class="alert alert-danger" id="alert" role="alert">
                 {{ Session::get('Error') }}
             </div>
         @endif
 
+        @if(count($errors) > 0)
+            <div class="alert alert-danger" id="alert" role="alert">
+                @foreach ($errors->all() as $error)
+                    <div>{{ $error }}</div>
+                @endforeach
+            </div>
+        @endif
     </div>
 </div>
     

@@ -16,7 +16,7 @@ html {
 
 .alertRow {
   position: absolute;
-  z-index: 2;
+  z-index: 3;
   top: 30px;
   text-align: center;
   width: 100%;
