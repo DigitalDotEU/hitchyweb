@@ -4,9 +4,9 @@
 <div class="row map">
 
     <div class="searchForm">
-            <div class="form-group">
-                <input type="text" class="form-control" id="location" value="" placeholder="Search location..">
-            </div>
+        <div class="form-group">
+            <input type="text" class="form-control" id="location" value="" placeholder="Search location..">
+        </div>
     </div>
 
     {!! Mapper::render() !!}
@@ -57,14 +57,11 @@
                 <i class="fas fa-times"></i>
             </div>                           
         </div>
-
         <div class="btn btn-default" id="addPointBtn"><i class="fas fa-plus-circle"></i></div>
     @endif
 
 </div>
 @endsection
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
 <script type="text/javascript">
     function addMapStyling(map) {
@@ -179,7 +176,6 @@
             });
         }
         
-
         var options = {
             styles: [
                 {
@@ -360,5 +356,4 @@
         };
         map.setOptions(options);
     }
-
 </script>

@@ -27,7 +27,6 @@ class LoginController extends Controller
             $response = $client->request('POST', 'http://127.0.0.1:8080/api/login', [
                 'headers' => ['Content-Type' => 'application/json'],
                 'body' => json_encode($body)
-
             ]);
         }catch (\Exception $e) {
             Session::flash('Error', "Something gone wrong. Please try again.");

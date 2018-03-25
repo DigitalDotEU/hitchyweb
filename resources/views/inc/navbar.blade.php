@@ -44,7 +44,7 @@
     </button>
 
 <div class="row-fluid alertRow">
-    <div class="col-sm-4 col-sm-offset-4 col-xs-8 col-xs-offset-2 alertCol">
+    <div class="col-sm-4 col-sm-offset-4 alertCol">
     
         @if (Session::has('Success'))
             <div class="alert alert-success" id="alert" role="alert">
