@@ -20,7 +20,7 @@ return [
     | A Google API key to link Googlmapper to Google's API.
     |
     */
-    'key' => env('GOOGLE_API_KEY', 'AIzaSyAtqWsq5Ai3GYv6dSa6311tZiYKlbYT4mw'),
+    'key' => env('GOOGLE_API_KEY', 'AIzaSyAAt2weLl7hFNYv7GUh5EGhnnqWu7vlLmU'),
 
     /*
     |--------------------------------------------------------------------------
@@ -203,7 +203,8 @@ return [
         | Display a custom icon for markers. (Link to an image)
         |
         */
-        'icon' => '',
+        'icon' => '/images/marker2.png',
+
 
         /*
         |--------------------------------------------------------------------------

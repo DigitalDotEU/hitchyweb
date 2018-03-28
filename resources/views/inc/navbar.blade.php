@@ -7,7 +7,7 @@
     <ul class="nav sidebar-nav">
         <li class="sidebar-brand">
             <a href="{{url('/')}}">
-               Hitchy
+                <img src="{{ URL::to('/') }}/images/logo2.png">
             </a>
         </li>
         <li>

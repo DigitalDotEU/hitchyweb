@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Client;
-use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Session;
 
@@ -19,8 +18,8 @@ class LoginController extends Controller
     public function store(Request $request)
     {
         //create new user
-        $body['email'] = Input::get('email');
-        $body['password'] = Input::get('password');
+        $body['email'] = $request->input('email');
+        $body['password'] = $request->input('password');
 
         $client = new \GuzzleHttp\Client();
         try{
