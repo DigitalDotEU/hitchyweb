@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Session;
 use Validator;
+use DB; 
 
 class PointController extends Controller
 {
@@ -23,10 +24,20 @@ class PointController extends Controller
             ]
         );
 
+        //get point content
         $client = new Client();
         $res = $client->request('GET', 'http://127.0.0.1:8080/api/points');
-
         $res = json_decode($res->getBody(), true);
+
+        //get comments content
+        $client2 = new Client();
+        $res2 = $client2->request('GET', 'http://127.0.0.1:8080/api/comments');
+        $res2 = json_decode($res2->getBody(), true);
+
+        //get users content
+        $client3 = new Client();
+        $res3 = $client3->request('GET', 'http://127.0.0.1:8080/api/users');
+        $res3 = json_decode($res3->getBody(), true);
         
         foreach($res as $point){
 
@@ -37,19 +48,42 @@ class PointController extends Controller
                 $rating = round($point['ratingSumVotes']/$point['ratingNumVotes'], 2);
                 $safety = round($point['safetySumVotes']/$point['safetyNumVotes'], 2);
                 $author = $point['author'];
+                $id = $point['id'];
+                $commentToPost = '';
+
+                //if point has the same id as point_id in comment table
+                foreach($res2 as $comment){
+                    //only submitted comments
+                    if($comment['submittedByAdmin'] == true){
+                        //if user_id matches to user
+                        foreach($res3 as $user){
+                            if($comment['point_id'] == $id && $comment['user_id'] == $user['id']){
+                                $commentToPost .= '<div class="commentSingle"';
+                                $commentToPost .= '<p class="commentHeader">' . $user['email'] . ' commented ' . $comment['created_at'] . ': </p>';
+                                $commentToPost .= '<p class="commentBody">' . $comment['body'] . '</p>';
+                                $commentToPost .= '</div>';
+                            }
+                        }
+                    }
+                }
     
                 Mapper::marker($lat, $lng,
                 [
                     'draggable' => true, 
                     'eventClick' => '
+                                    $(\'#point_id\').val(\'' . $id . '\');
+                                    console.log(\'' . $id . '\');
+
                                     $(\'.panel2\').css(\'display\', \'none\');
                                     $(\'.panel\').css(\'display\', \'block\');
-                                    $(\'.panel\').empty();                
-                                    $(\'.panel\').append(\'<p>' . $point['name'] . '</p>\');
-                                    $(\'.panel\').append(\'<p>' . $point['description'] . '</p>\');
-                                    $(\'.panel\').append(\'<p>Rating: ' . $rating . '</p>\');
-                                    $(\'.panel\').append(\'<p>Safety: ' . $safety . '</p>\');
-                                    $(\'.panel\').append(\'<p>Created by: ' . $author . '</p>\');
+                                    $(\'.panelContent\').empty();                
+                                    $(\'.panelContent\').append(\'<p>' . $point['name'] . '</p>\');
+                                    $(\'.panelContent\').append(\'<p>' . $point['description'] . '</p>\');
+                                    $(\'.panelContent\').append(\'<p>Rating: ' . $rating . '</p>\');
+                                    $(\'.panelContent\').append(\'<p>Safety: ' . $safety . '</p>\');
+                                    $(\'.panelContent\').append(\'<p>Created by: ' . $author . '</p>\');
+                                    $(\'.panelContent\').append(\'' . $commentToPost . '\');
+
                                     $(\'.panel\').append(\'<div id="closePanel"><i class="fas fa-times"></i></div>\');
                                     $(\'#closePanel\').click(function(){ $(\'.panel\').css(\'display\', \'none\'); });
                                     '

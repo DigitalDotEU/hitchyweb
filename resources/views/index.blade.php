@@ -11,7 +11,23 @@
 
     {!! Mapper::render() !!}
 
-    <div class="panel"></div>
+    <div class="panel">
+    
+        <div class="panelContent"></div>
+        
+        @if(Session::get('token'))
+             <form id="addComment" method="post" action="{{ action('CommentController@store') }}">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="commentBody" name="commentBody" placeholder="Comment ...">
+                </div>
+
+                <input type="text" class="form-control" id="point_id" name="point_id" type="hidden">
+
+                <input name="_token" type="hidden" value="{{ csrf_token() }}"/>
+                <button type="submit" class="btn btn-primary">Add Comment</button>
+            </form>
+        @endif
+    </div>
 
     <!-- display add new point only for logged in users -->
     @if(Session::get('token'))
