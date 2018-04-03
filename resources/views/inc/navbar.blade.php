@@ -13,6 +13,9 @@
         <li>
             <a href="{{url('/index')}}">Map</a>
         </li>
+        <li>
+            <a href="{{url('/events')}}">Events</a>
+        </li>
 
         @if(!Session::get('token'))
             <li>

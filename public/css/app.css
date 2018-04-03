@@ -239,6 +239,14 @@ html {
   padding: 0 !important;
 }
 
+#wrapper #page-content-wrapper .container .events {
+  padding-top: 100px;
+}
+
+#wrapper #page-content-wrapper .container .events .eventsCol {
+  width: 100%;
+}
+
 #wrapper #page-content-wrapper .container .register {
   width: 100vw;
   padding-top: 100px;
@@ -253,6 +261,25 @@ html {
   width: 100vw;
   height: 100vh;
   margin: 0 auto;
+}
+
+#wrapper #page-content-wrapper .container .map .loginInfo {
+  position: absolute;
+  z-index: 4;
+  width: 80%;
+  left: 10%;
+  background-color: #fff;
+  bottom: 10%;
+  font-size: 22px;
+  margin: 0 auto;
+  text-align: center;
+  border: 3px solid #e7e7e7;
+  border-radius: 10px;
+  padding: 20px 0;
+}
+
+#wrapper #page-content-wrapper .container .map .loginInfo p {
+  margin: 0;
 }
 
 #wrapper #page-content-wrapper .container .map .searchForm {
@@ -274,7 +301,6 @@ html {
   font-size: 70px;
   bottom: 50px;
   right: 50px;
-  display: none;
   background: none;
   border: none;
   color: #91cbff;
@@ -286,15 +312,15 @@ html {
 
 #wrapper #page-content-wrapper .container .map .panel {
   width: 100vw;
-  height: 300px;
+  height: 400px;
   margin: 0;
   position: absolute;
   bottom: 0;
   background-color: #fff;
   display: none;
   padding: 50px 70px;
-  -webkit-box-shadow: 0px -5px 30px 4px rgba(0, 0, 0, 0.35);
-  box-shadow: 0px 0px -5px 4px rgba(0, 0, 0, 0.35);
+  -webkit-box-shadow: 0px -30px 42px 10px #d4d4d4;
+  box-shadow: 0px -30px 42px 10px #d4d4d4;
 }
 
 #wrapper #page-content-wrapper .container .map .panel p {

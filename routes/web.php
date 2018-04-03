@@ -21,3 +21,5 @@ Route::post('/adminSubmit/{id}', ['uses' =>'AdminController@submitPoint']);
 Route::get('/adminSubmit/{id}', ['uses' =>'AdminController@submitPoint']);
 
 Route::post('comment', 'CommentController@store');
+
+Route::get('/events', 'EventController@index');

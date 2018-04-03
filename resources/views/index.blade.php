@@ -11,17 +11,25 @@
 
     {!! Mapper::render() !!}
 
+    @if(!Session::get('token'))
+        <div class="loginInfo">
+            <div class="col-sm-8 col-sm-offset-2 loginInfoCol">
+                <p>Please sign in to add new points, comment existing points and many more.</p>
+            </div>
+        </div>
+    @endif
+
     <div class="panel">
     
         <div class="panelContent"></div>
-        
+
         @if(Session::get('token'))
              <form id="addComment" method="post" action="{{ action('CommentController@store') }}">
                 <div class="form-group">
                     <input type="text" class="form-control" id="commentBody" name="commentBody" placeholder="Comment ...">
                 </div>
 
-                <input type="text" class="form-control" id="point_id" name="point_id" type="hidden">
+                <input class="form-control" id="point_id" name="point_id" type="hidden">
 
                 <input name="_token" type="hidden" value="{{ csrf_token() }}"/>
                 <button type="submit" class="btn btn-primary">Add Comment</button>
@@ -130,11 +138,12 @@
         //add new point based on user click map position when user click on map-canvas-0
         document.getElementById('map-canvas-0').onclick = function(){
             //get cursor position on map 
-            $("#addPointBtn").css('display', 'block');
+            //$("#addPointBtn").css('display', 'block');
 
             //when user click addPointBtn create draggable marker and update lat and lng when user drag marker, dont display plus button to prevent 
             //creating few markers. display panel div to display data inside of that.
             $( "#addPointBtn" ).click(function() {
+                 $(".panel").css('display', 'none');
                 var ctr = map.getCenter();
                 var lt = ctr.lat();
                 var lng = ctr.lng();
@@ -186,8 +195,7 @@
                     //set marker current position adress to content of infowindow
                     infowindow.open(map, marker);
                 });
-
-                $("#addPointBtn").css('display', 'none');
+                
                 $(".panel2").css('display', 'block');
             });
         }

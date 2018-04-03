@@ -221,6 +221,13 @@ html { height: 100%;}
             margin: 0 !important;
             padding: 0 !important;
             
+            .events{
+                padding-top: 100px;
+                
+                .eventsCol{
+                    width: 100%;
+                }
+            }
         
             .register{
                 width: 100vw;
@@ -236,6 +243,25 @@ html { height: 100%;}
                 width: 100vw;
                 height: 100vh;
                 margin: 0 auto;
+
+                .loginInfo{
+                    position: absolute;
+                    z-index: 4;
+                    width: 80%;
+                    left: 10%;
+                    background-color: #fff;
+                    bottom: 10%;
+                    font-size: 22px;
+                    margin: 0 auto;
+                    text-align: center;
+                    border: 3px solid #e7e7e7;
+                    border-radius: 10px;
+                    padding: 20px 0;
+
+                    p{
+                        margin: 0;
+                    }
+                }
         
                 .searchForm{
                     position: absolute;
@@ -257,7 +283,7 @@ html { height: 100%;}
                     font-size: 70px;
                     bottom: 50px;
                     right: 50px;
-                    display:none;
+                    //display:none;
                     background: none;
                     border: none;
                     color: #91cbff;
@@ -269,16 +295,16 @@ html { height: 100%;}
         
                 .panel{
                     width: 100vw;
-                    height: 300px;
+                    height: 400px;
                     margin: 0;
                     position: absolute;
                     bottom: 0;
                     background-color: #fff;
                     display: none;
                     padding: 50px 70px;
-                    -webkit-box-shadow: 0px -5px 30px 4px rgba(0,0,0,0.35);
-                    -moz-box-shadow: 0px -5px 30px 4px rgba(0,0,0,0.35);
-                    box-shadow: 0px 0px -5px 4px rgba(0,0,0,0.35);
+                    -webkit-box-shadow: 0px -30px 42px 10px rgba(212,212,212,1);
+                    -moz-box-shadow: 0px -30px 42px 10px rgba(212,212,212,1);
+                    box-shadow: 0px -30px 42px 10px rgba(212,212,212,1);
         
                     p{
                         font-size: 16px;

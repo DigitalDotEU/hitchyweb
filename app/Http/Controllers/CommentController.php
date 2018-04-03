@@ -20,7 +20,7 @@ class CommentController extends Controller
         ]);
 
         if ($validator->fails()) {
-            Session::flash('Error', "You put wrong data. Please check your fields.");
+            Session::flash('Error', "Please write comment content before send that.");
             return Redirect::to('/index');
         }
         

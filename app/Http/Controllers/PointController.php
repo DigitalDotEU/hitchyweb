@@ -20,7 +20,7 @@ class PointController extends Controller
             [
                 'eventAfterLoad' => '',
                 'eventBeforeLoad' => 'addMapStyling(map);',
-                'zoom' => 10
+                'zoom' => 5
             ]
         );
 
@@ -72,7 +72,6 @@ class PointController extends Controller
                     'draggable' => true, 
                     'eventClick' => '
                                     $(\'#point_id\').val(\'' . $id . '\');
-                                    console.log(\'' . $id . '\');
 
                                     $(\'.panel2\').css(\'display\', \'none\');
                                     $(\'.panel\').css(\'display\', \'block\');
