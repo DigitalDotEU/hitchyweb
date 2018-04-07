@@ -54,7 +54,7 @@ class PointController extends Controller
                 //if point has the same id as point_id in comment table
                 foreach($res2 as $comment){
                     //only submitted comments
-                    if($comment['submittedByAdmin'] == true){
+                    //if($comment['submittedByAdmin'] == true){
                         //if user_id matches to user
                         foreach($res3 as $user){
                             if($comment['point_id'] == $id && $comment['user_id'] == $user['id']){
@@ -64,16 +64,20 @@ class PointController extends Controller
                                 $commentToPost .= '</div>';
                             }
                         }
-                    }
+                    //}
                 }
     
                 Mapper::marker($lat, $lng,
                 [
                     'draggable' => true, 
                     'eventClick' => '
+                    
                                     $(\'#point_id\').val(\'' . $id . '\');
+                                    $(\'#closePanel\').remove();
+                                    $(\'.loginInfo\').css(\'display\', \'none\');
 
                                     $(\'.panel2\').css(\'display\', \'none\');
+                                    $(\'#addPointBtn\').css(\'display\', \'none\');
                                     $(\'.panel\').css(\'display\', \'block\');
                                     $(\'.panelContent\').empty();                
                                     $(\'.panelContent\').append(\'<p>' . $point['name'] . '</p>\');
@@ -84,7 +88,7 @@ class PointController extends Controller
                                     $(\'.panelContent\').append(\'' . $commentToPost . '\');
 
                                     $(\'.panel\').append(\'<div id="closePanel"><i class="fas fa-times"></i></div>\');
-                                    $(\'#closePanel\').click(function(){ $(\'.panel\').css(\'display\', \'none\'); });
+                                    $(\'#closePanel\').click(function(){ $(\'.panel\').css(\'display\', \'none\'); $(\'.loginInfo\').css(\'display\', \'block\'); $(\'#addPointBtn\').css(\'display\', \'block\');});
                                     '
                 ]);
             }

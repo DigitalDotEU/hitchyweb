@@ -41,7 +41,7 @@ class CommentController extends Controller
             return Redirect::to('/index');
         }
 
-        Session::flash('Success', "You added comment. It must by accepted by our team. Nice job!");
+        Session::flash('Success', "You added comment. Nice job!");
 
         return Redirect::to('/index');
     }

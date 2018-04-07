@@ -55,6 +55,8 @@ class LoginController extends Controller
     public function logout()
     {
         Session::forget('token');
+        Session::forget('userID');
+        Session::forget('loggedInUser');
         Session::flash('Success', "You log out successfully.");
 
         return Redirect::to('/index');

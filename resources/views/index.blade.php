@@ -5,7 +5,7 @@
 
     <div class="searchForm">
         <div class="form-group">
-            <input type="text" class="form-control" id="location" value="" placeholder="Search location..">
+            <input type="text" class="form-control" id="location" value="" placeholder="Search location...">
         </div>
     </div>
 
@@ -87,6 +87,7 @@
 </div>
 @endsection
 
+
 <script type="text/javascript">
     function addMapStyling(map) {
 
@@ -94,6 +95,8 @@
         $('#closePanel2').click(function(){ 
             $('.panel2').css('display', 'none'); 
         });
+
+        
 
         //init geocoder
         var geocoder = new google.maps.Geocoder();

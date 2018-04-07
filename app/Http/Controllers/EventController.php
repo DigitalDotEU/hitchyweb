@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redirect;
+use Session;
+use Validator;
+use DB; 
 
 class EventController extends Controller
 {
@@ -36,5 +40,58 @@ class EventController extends Controller
         //dd($joinedUsers);
 
         return view('events.index')->with(['res' => $res, 'joinedUsers' => $joinedUsers]);
+    }
+
+    public function newEvent(){
+        return view('events.new');
+    }
+
+    public function store(Request $request){
+
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|max:255',
+            'description' => 'required|max:255',
+            'startPlaceLattitude' => 'required|max:255',
+            'startPlaceLongitude' => 'required|max:255',
+            'stopPlaceLattitude' => 'required|max:255',
+            'stopPlaceLongitude' => 'required|max:255',
+            'startDate' => 'required|max:255'
+        ]);
+
+        if ($validator->fails()) {
+            Session::flash('Error', "You put wrong data. Please check your fields.");
+            return Redirect::to('/newEvent');
+        }
+        
+        //get info from /index add new point and send that data with post request
+        $body['name'] = $request->input('name');
+        $body['description'] = $request->input('description');
+        $body['startPlaceLattitude'] = $request->input('startPlaceLattitude');
+        $body['startPlaceLongitude'] = $request->input('startPlaceLongitude');
+        $body['stopPlaceLattitude'] = $request->input('stopPlaceLattitude');
+        $body['stopPlaceLongitude'] = $request->input('stopPlaceLongitude');
+        $body['startDate'] = $request->input('startDate');
+        $body['author'] = $request->input('author');
+        $body['joinedUser'] = $request->input('joinedUser');
+
+        $client = new \GuzzleHttp\Client();
+        try{
+            $response = $client->request('POST', 'http://127.0.0.1:8080/api/events', [
+                'headers' => ['Content-Type' => 'application/json'],
+                'body' => json_encode($body)
+
+            ]);
+        }catch (\Exception $e) {
+            Session::flash('Error', "Something gone wrong. Please try again.");
+            return Redirect::to('/events');
+        }
+
+        Session::flash('Success', "Thank you. If you added new event it must be accept by our team. Nice job!");
+
+        return Redirect::to('/events');
+    }
+
+    public function joinEvent(Request $request){
+
     }
 }
