@@ -10,7 +10,6 @@ Route::resource('register', 'RegisterController');
 
 Route::get('/login', 'LoginController@index');
 Route::resource('login', 'LoginController');
-
 Route::get('/logout', 'LoginController@logout');
 
 Route::get('/profile', 'ProfileController@index');
@@ -26,3 +25,4 @@ Route::get('/events', 'EventController@index');
 Route::get('/newEvent', 'EventController@newEvent');
 Route::post('events', 'EventController@store');
 Route::post('joinEvent', 'EventController@joinEvent');
+Route::get('events/{id}', array('uses' => 'EventController@show'));

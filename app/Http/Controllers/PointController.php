@@ -71,7 +71,6 @@ class PointController extends Controller
                 [
                     'draggable' => true, 
                     'eventClick' => '
-                    
                                     $(\'#point_id\').val(\'' . $id . '\');
                                     $(\'#closePanel\').remove();
                                     $(\'.loginInfo\').css(\'display\', \'none\');
@@ -79,17 +78,32 @@ class PointController extends Controller
                                     $(\'.panel2\').css(\'display\', \'none\');
                                     $(\'#addPointBtn\').css(\'display\', \'none\');
                                     $(\'.panel\').css(\'display\', \'block\');
-                                    $(\'.panelContent\').empty();                
-                                    $(\'.panelContent\').append(\'<p>' . $point['name'] . '</p>\');
-                                    $(\'.panelContent\').append(\'<p>' . $point['description'] . '</p>\');
+
+                                    $(\'.panelPointHeader\').empty();
+                                    $(\'.panelPointAddress\').empty();
+                                    $(\'.panelContent\').empty();  
+
+                                    $(\'.panelPointHeader\').append(\'<p>' . $point['name'] . '</p>\');
+                                    $(\'.panelPointHeader\').append(\'<p>' . $point['description'] . '</p>\');
+
+                                    
+                                    var lat = ' . $lat . ';
+                                    var lng = ' . $lng .';
+                                    geocoder2 = new google.maps.Geocoder();
+                                    var latlng = new google.maps.LatLng(lat, lng);
+                                    geocoder2.geocode({
+                                        \'latLng\': latlng
+                                    }, function(results, status) {
+                                        $(\'.panelPointAddress\').append(\'<p>Address: \' + results[4].formatted_address + \'</p>\');
+                                    });
+
                                     $(\'.panelContent\').append(\'<p>Rating: ' . $rating . '</p>\');
                                     $(\'.panelContent\').append(\'<p>Safety: ' . $safety . '</p>\');
                                     $(\'.panelContent\').append(\'<p>Created by: ' . $author . '</p>\');
                                     $(\'.panelContent\').append(\'' . $commentToPost . '\');
 
                                     $(\'.panel\').append(\'<div id="closePanel"><i class="fas fa-times"></i></div>\');
-                                    $(\'#closePanel\').click(function(){ $(\'.panel\').css(\'display\', \'none\'); $(\'.loginInfo\').css(\'display\', \'block\'); $(\'#addPointBtn\').css(\'display\', \'block\');});
-                                    '
+                                    $(\'#closePanel\').click(function(){ $(\'.panel\').css(\'display\', \'none\'); $(\'.loginInfo\').css(\'display\', \'block\'); $(\'#addPointBtn\').css(\'display\', \'block\');});           '
                 ]);
             }
         }

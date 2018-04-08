@@ -237,6 +237,33 @@ html {
 #wrapper #page-content-wrapper .container {
   margin: 0 !important;
   padding: 0 !important;
+  width: 100%;
+}
+
+#wrapper #page-content-wrapper .container .eventSingle .eventSingleCol .single {
+  width: 70%;
+  margin: 70px auto;
+}
+
+#wrapper #page-content-wrapper .container .eventSingle .eventPointMap {
+  height: 100vh;
+}
+
+#wrapper #page-content-wrapper .container .newEvent .newEventCol {
+  margin: 70px auto;
+}
+
+#wrapper #page-content-wrapper .container .newEvent .newEventCol h1 {
+  text-align: center;
+}
+
+#wrapper #page-content-wrapper .container .newEvent .newEventCol form {
+  width: 70%;
+  margin: 0 auto;
+}
+
+#wrapper #page-content-wrapper .container .newEvent .newEventMap {
+  height: 100vh;
 }
 
 #wrapper #page-content-wrapper .container .events {

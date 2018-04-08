@@ -21,6 +21,8 @@
 
     <div class="panel">
     
+        <div class="panelPointHeader"></div>
+        <div class="panelPointAddress"></div>
         <div class="panelContent"></div>
 
         @if(Session::get('token'))
@@ -94,9 +96,8 @@
         //close add new point panel
         $('#closePanel2').click(function(){ 
             $('.panel2').css('display', 'none'); 
+            $("#addPointBtn").css('display', 'block');
         });
-
-        
 
         //init geocoder
         var geocoder = new google.maps.Geocoder();
@@ -146,7 +147,8 @@
             //when user click addPointBtn create draggable marker and update lat and lng when user drag marker, dont display plus button to prevent 
             //creating few markers. display panel div to display data inside of that.
             $( "#addPointBtn" ).click(function() {
-                 $(".panel").css('display', 'none');
+                $(".panel").css('display', 'none');
+                $("#addPointBtn").css('display', 'none');
                 var ctr = map.getCenter();
                 var lt = ctr.lat();
                 var lng = ctr.lng();

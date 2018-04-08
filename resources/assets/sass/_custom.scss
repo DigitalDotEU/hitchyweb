@@ -218,6 +218,35 @@ html { height: 100%;}
         .container{
             margin: 0 !important;
             padding: 0 !important;
+            width:100%;
+
+            .eventSingle{
+                .eventSingleCol{
+                    .single{
+                        width: 70%;
+                        margin: 70px auto;
+                    }
+                }
+                .eventPointMap{
+                    height: 100vh;
+                }
+            }
+
+            .newEvent{
+                .newEventCol{
+                    margin: 70px auto;
+                    h1{
+                        text-align: center;
+                    }
+                    form{
+                        width: 70%;
+                        margin: 0 auto;
+                    }
+                }
+                .newEventMap{
+                    height: 100vh;
+                }
+            }
             
             .events{
                 padding-top: 100px;

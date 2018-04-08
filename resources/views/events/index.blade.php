@@ -5,7 +5,6 @@
     <div class="col-sm-8 col-sm-offset-2 eventsCol">
         <h1>Events</h1>
 
-       
         @foreach($res as $event)
             @if($event['submittedByAdmin'] == 1)
                 <div class="well">
@@ -15,6 +14,10 @@
                     <p>Start place coordinates: {{$event['startPlaceLattitude']}},  {{$event['startPlaceLongitude']}}</p>
                     <p>Stop place coordinates: {{$event['stopPlaceLattitude']}},  {{$event['stopPlaceLongitude']}}</p>
                     <p>Start date: {{$event['startDate']}}</p>
+
+                    <p> id: {{$event['id']}}</p>
+                    <?php $pathSingle = '/events/' . $event['id']; ?>
+                    <a href="{{url($pathSingle)}}"><div class="btn btn-default">Show details</div></a>
 
                     <?php $userjoined = false; ?>
                     <p>Joined User:
@@ -29,7 +32,7 @@
                         @endforeach
                     </p>
 
-                    <!-- invisible form -->
+                    <!-- invisible form for join event-->
                     @if($event['author'] != Session::get('loggedInUser') && $userjoined == false && Session::get('token'))
                        <form method="post" action="{{ action('EventController@store') }}">
                             <input type="hidden" class="form-control" id="name" name="name" value="{{$event['name']}}">

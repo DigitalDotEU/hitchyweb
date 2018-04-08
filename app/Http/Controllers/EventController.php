@@ -8,6 +8,7 @@ use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Session;
+use Mapper;
 use Validator;
 use DB; 
 
@@ -38,11 +39,18 @@ class EventController extends Controller
         }
 
         //dd($joinedUsers);
-
         return view('events.index')->with(['res' => $res, 'joinedUsers' => $joinedUsers]);
     }
 
     public function newEvent(){
+        Mapper::map(52.22977, 21.01178,
+            [
+                'eventAfterLoad' => '',
+                'eventBeforeLoad' => 'newEvent(map);',
+                'zoom' => 5
+            ]
+        );
+
         return view('events.new');
     }
 
@@ -51,10 +59,10 @@ class EventController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required|max:255',
             'description' => 'required|max:255',
-            'startPlaceLattitude' => 'required|max:255',
-            'startPlaceLongitude' => 'required|max:255',
-            'stopPlaceLattitude' => 'required|max:255',
-            'stopPlaceLongitude' => 'required|max:255',
+            'startPlaceLattitude' => 'required|numeric|between:0,99.99',
+            'startPlaceLongitude' => 'required|numeric|between:0,99.99',
+            'stopPlaceLattitude' => 'required|numeric|between:0,99.99',
+            'stopPlaceLongitude' => 'required|numeric|between:0,99.99',
             'startDate' => 'required|max:255'
         ]);
 
@@ -91,7 +99,35 @@ class EventController extends Controller
         return Redirect::to('/events');
     }
 
-    public function joinEvent(Request $request){
+    public function show($id){
+        //get event with $id = id
+        $client = new Client();
+        $res = $client->request('GET', 'http://127.0.0.1:8080/api/events/' . $id);
+        $res = json_decode($res->getBody(), true);
 
+        //get all events
+        $client2 = new Client();
+        $res2 = $client2->request('GET', 'http://127.0.0.1:8080/api/allEvents');
+        $res2 = json_decode($res2->getBody(), true);
+
+        //dd($res2);
+        $joinedUsers = array();
+
+        //find joined users to specific event name and return key value pairs test[0]=>[0]eventName, [1]user
+        foreach($res2 as $singleEvent){
+            if($res['name'] == $singleEvent['name'] && $res['joinedUser'] != $singleEvent['joinedUser']){
+                array_push($joinedUsers, array($res['name'], $singleEvent['joinedUser']));
+            }
+        }
+
+        Mapper::map($res['startPlaceLattitude'], $res['startPlaceLongitude'],
+            [
+                'eventAfterLoad' => '',
+                'eventBeforeLoad' => 'eventPoint(map);',
+                'zoom' => 8
+            ]
+        );
+
+        return view('events.single')->with(['res' => $res, 'joinedUsers' => $joinedUsers]);
     }
 }
