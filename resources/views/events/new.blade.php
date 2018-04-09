@@ -40,7 +40,7 @@
             <!--</div>-->
 
             <div class="form-group">
-                <label for="startDate">start Date(e.g '2018-04-02 08:17:46'):</label>
+                <label for="startDate">start Date:</label>
                 <input type="date" class="form-control" id="startDate" name="startDate">
             </div>
 
@@ -86,6 +86,7 @@
                 position: myLatLng,
                 map: map,
                 draggable: true,
+                icon: '../images/marker3.png'
             });
 
             //int infowindow
@@ -141,6 +142,7 @@
                 position: myLatLng,
                 map: map,
                 draggable: true,
+                icon: '../images/marker3.png'
             });
 
             //int infowindow

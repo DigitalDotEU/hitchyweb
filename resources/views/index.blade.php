@@ -166,6 +166,7 @@
                     position: myLatLng,
                     map: map,
                     draggable: true,
+                    icon: '../images/marker3.png'
                 });
 
                 //int infowindow

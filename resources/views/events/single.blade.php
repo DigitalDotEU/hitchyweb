@@ -32,6 +32,28 @@
                         @endforeach
                     </p>
 
+                    <div class="eventComments">
+                        <h3>Comments:</h3>
+                        @foreach ($res3 as $comment)
+                            <div class="eventSingleComment">
+                                <p>{{$comment['user_email']}} commented {{$comment['created_at']}}:</p>
+                                <p>{{$comment['body']}}</p>
+                            </div>
+                        @endforeach
+
+                        @if (Session::get('token'))
+                            <form method="post" action="{{ action('EventController@eventCommentStore') }}">
+                                <input type="text" class="form-control" id="body" name="body">
+                                <input type="hidden" class="form-control" id="user_id" name="user_id" value="{{Session::get('userID')}}">
+                                <input type="hidden" class="form-control" id="user_email" name="user_email" value="{{Session::get('loggedInUser')}}">
+                                <input type="hidden" class="form-control" id="event_id" name="event_id" value="{{$res['id']}}">
+
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                <button type="submit" class="btn btn-default">Comment</button>  
+                            </form>
+                        @endif    
+                    </div>
+
                     <!-- invisible form -->
                     @if($res['author'] != Session::get('loggedInUser') && $userjoined == false && Session::get('token'))
                        <form method="post" action="{{ action('EventController@store') }}">
@@ -93,7 +115,7 @@
         var marker = new google.maps.Marker({
             position: myLatLng,
             map: map,
-            draggable: true,
+            draggable: true
         });
 
         //console.log(startPlaceLattitude);

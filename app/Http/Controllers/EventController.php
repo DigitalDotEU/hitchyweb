@@ -15,7 +15,6 @@ use DB;
 class EventController extends Controller
 {
     public function index(){
-        
         //get all events which author==joinedUser
         $client = new Client();
         $res = $client->request('GET', 'http://127.0.0.1:8080/api/events');
@@ -26,7 +25,6 @@ class EventController extends Controller
         $res2 = $client2->request('GET', 'http://127.0.0.1:8080/api/allEvents');
         $res2 = json_decode($res2->getBody(), true);
 
-        //dd($res2);
         $joinedUsers = array();
 
         //find joined users to specific event name and return key value pairs test[0]=>[0]eventName, [1]user
@@ -38,7 +36,6 @@ class EventController extends Controller
             }
         }
 
-        //dd($joinedUsers);
         return view('events.index')->with(['res' => $res, 'joinedUsers' => $joinedUsers]);
     }
 
@@ -95,8 +92,42 @@ class EventController extends Controller
         }
 
         Session::flash('Success', "Thank you. If you added new event it must be accept by our team. Nice job!");
-
         return Redirect::to('/events');
+    }
+
+    public function eventCommentStore(Request $request){
+        $validator = Validator::make($request->all(), [
+            'body' => 'required|max:255',
+            'user_id' => 'required|max:255',
+            'user_email' => 'required|max:255',
+            'event_id' => 'required|max:255'
+        ]);
+
+        if ($validator->fails()) {
+            Session::flash('Error', "You put wrong data. Please check your fields.");
+            return Redirect::to('/newEvent');
+        }
+        
+        //get info from /index add new point and send that data with post request
+        $body['commentBody'] = $request->input('body');
+        $body['user_id'] = $request->input('user_id');
+        $body['user_email'] = $request->input('user_email');
+        $body['event_id'] = $request->input('event_id');
+       
+        $client = new \GuzzleHttp\Client();
+        try{
+            $response = $client->request('POST', 'http://127.0.0.1:8080/api/eventComments', [
+                'headers' => ['Content-Type' => 'application/json'],
+                'body' => json_encode($body)
+
+            ]);
+        }catch (\Exception $e) {
+            Session::flash('Error', "Something gone wrong. Please try again.");
+            return Redirect::to('/events');
+        }
+
+        Session::flash('Success', "Thank you for comment.");
+        return Redirect::back();
     }
 
     public function show($id){
@@ -110,7 +141,11 @@ class EventController extends Controller
         $res2 = $client2->request('GET', 'http://127.0.0.1:8080/api/allEvents');
         $res2 = json_decode($res2->getBody(), true);
 
-        //dd($res2);
+        //get comments for event
+        $client3 = new Client();
+        $res3 = $client3->request('GET', 'http://127.0.0.1:8080/api/eventComments/' . $id);
+        $res3 = json_decode($res3->getBody(), true);
+        
         $joinedUsers = array();
 
         //find joined users to specific event name and return key value pairs test[0]=>[0]eventName, [1]user
@@ -128,6 +163,6 @@ class EventController extends Controller
             ]
         );
 
-        return view('events.single')->with(['res' => $res, 'joinedUsers' => $joinedUsers]);
+        return view('events.single')->with(['res' => $res, 'joinedUsers' => $joinedUsers, 'res3' => $res3]);
     }
 }

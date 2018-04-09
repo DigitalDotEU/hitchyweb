@@ -245,6 +245,13 @@ html {
   margin: 70px auto;
 }
 
+#wrapper #page-content-wrapper .container .eventSingle .eventSingleCol .single #startPlaceLattitude,
+#wrapper #page-content-wrapper .container .eventSingle .eventSingleCol .single #startPlaceLongitude,
+#wrapper #page-content-wrapper .container .eventSingle .eventSingleCol .single #stopPlaceLattitude,
+#wrapper #page-content-wrapper .container .eventSingle .eventSingleCol .single #stopPlaceLongitude {
+  display: none;
+}
+
 #wrapper #page-content-wrapper .container .eventSingle .eventPointMap {
   height: 100vh;
 }
@@ -268,10 +275,6 @@ html {
 
 #wrapper #page-content-wrapper .container .events {
   padding-top: 100px;
-}
-
-#wrapper #page-content-wrapper .container .events .eventsCol {
-  width: 100%;
 }
 
 #wrapper #page-content-wrapper .container .register {

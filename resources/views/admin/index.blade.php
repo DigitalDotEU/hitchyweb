@@ -5,7 +5,10 @@
     <div class="col-sm-10 col-sm-offset-1 adminColumn">
         <h1>Admin Page</h1>
 
-        
+        <a href="/adminPageEvents">
+            <div class="btn btn-default">List of unsubmitted events</div>
+        </a>
+
         @foreach($res as $post)
             @if($post['submittedByAdmin'] == 0)
                 <div class="well">

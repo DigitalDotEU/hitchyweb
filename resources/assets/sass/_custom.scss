@@ -225,6 +225,10 @@ html { height: 100%;}
                     .single{
                         width: 70%;
                         margin: 70px auto;
+
+                        #startPlaceLattitude, #startPlaceLongitude, #stopPlaceLattitude, #stopPlaceLongitude{
+                            display: none;
+                        }
                     }
                 }
                 .eventPointMap{
@@ -250,10 +254,6 @@ html { height: 100%;}
             
             .events{
                 padding-top: 100px;
-                
-                .eventsCol{
-                    width: 100%;
-                }
             }
         
             .register{
