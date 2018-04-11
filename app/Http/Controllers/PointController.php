@@ -20,7 +20,8 @@ class PointController extends Controller
             [
                 'eventAfterLoad' => '',
                 'eventBeforeLoad' => 'addMapStyling(map);',
-                'zoom' => 5
+                'zoom' => 5,
+                'marker' => false,
             ]
         );
 
@@ -74,6 +75,8 @@ class PointController extends Controller
                                     $(\'#point_id\').val(\'' . $id . '\');
                                     $(\'#closePanel\').remove();
                                     $(\'.loginInfo\').css(\'display\', \'none\');
+                                    $(".logedInfo").css(\'display\', \'none\'); 
+                                    $(".searchForm").css(\'display\', \'none\');
 
                                     $(\'.panel2\').css(\'display\', \'none\');
                                     $(\'#addPointBtn\').css(\'display\', \'none\');
@@ -81,9 +84,10 @@ class PointController extends Controller
 
                                     $(\'.panelPointHeader\').empty();
                                     $(\'.panelPointAddress\').empty();
+                                    $(\'.panelComments\').empty();
                                     $(\'.panelContent\').empty();  
 
-                                    $(\'.panelPointHeader\').append(\'<p>' . $point['name'] . '</p>\');
+                                    $(\'.panelPointHeader\').append(\'<h1 class="pointName">' . $point['name'] . '</h1>\');
                                     $(\'.panelPointHeader\').append(\'<p>' . $point['description'] . '</p>\');
 
                                     
@@ -100,10 +104,12 @@ class PointController extends Controller
                                     $(\'.panelContent\').append(\'<p>Rating: ' . $rating . '</p>\');
                                     $(\'.panelContent\').append(\'<p>Safety: ' . $safety . '</p>\');
                                     $(\'.panelContent\').append(\'<p>Created by: ' . $author . '</p>\');
-                                    $(\'.panelContent\').append(\'' . $commentToPost . '\');
+
+                                    $(\'.panelComments\').append(\'<h3>Comments:</h3>\');
+                                    $(\'.panelComments\').append(\'' . $commentToPost . '\');
 
                                     $(\'.panel\').append(\'<div id="closePanel"><i class="fas fa-times"></i></div>\');
-                                    $(\'#closePanel\').click(function(){ $(\'.panel\').css(\'display\', \'none\'); $(\'.loginInfo\').css(\'display\', \'block\'); $(\'#addPointBtn\').css(\'display\', \'block\');});           '
+                                    $(\'#closePanel\').click(function(){ $(".logedInfo").css(\'display\', \'block\'); $(".searchForm").css(\'display\', \'block\'); $(\'.panel\').css(\'display\', \'none\'); $(\'.loginInfo\').css(\'display\', \'block\'); $(\'#addPointBtn\').css(\'display\', \'block\');});           '
                 ]);
             }
         }

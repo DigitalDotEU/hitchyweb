@@ -7,17 +7,17 @@
 
        <form method="post" action="{{ action('EventController@store') }}">
             <div class="form-group">
-                <label for="name">Event name:</label>
-                <input type="text" class="form-control" id="name" name="name">
+               <!-- <label for="name">Event name:</label>-->
+                <input type="text" class="form-control" id="name" name="name" placeholder="Event name" required>
             </div>
 
             <div class="form-group">
-                <label for="description">Description:</label>
-                <input type="text" class="form-control" id="description" name="description">
+               <!-- <label for="description">Description:</label>-->
+                <input type="text" class="form-control" id="description" name="description" placeholder="Event description" required>
             </div>
 
-            <div id="startPlacePick" class="btn btn-default">Pick start point</div>
-            <div id="stopPlacePick" class="btn btn-default">Pick stop point</div>
+            <div id="startPlacePick" class="btn btn-default startPlacePickBtn">Pick start point</div>
+            <div id="stopPlacePick" class="btn btn-default stopPlacePickBtn">Pick stop point</div>
 
             <!--<div class="form-group">
                 <label for="startPlaceLattitude">startPlaceLattitude:</label>-->
@@ -39,9 +39,9 @@
                 <input type="hidden" class="form-control" id="stopPlaceLongitude" name="stopPlaceLongitude">
             <!--</div>-->
 
-            <div class="form-group">
+            <div class="form-group dateGroup">
                 <label for="startDate">start Date:</label>
-                <input type="date" class="form-control" id="startDate" name="startDate">
+                <input type="date" class="form-control" id="startDate" name="startDate" required>
             </div>
 
             <input type="hidden" class="form-control" id="author" name="author" value="{{Session::get('loggedInUser')}}">
@@ -50,7 +50,7 @@
 
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
-            <button type="submit" class="btn btn-default">Add event</button>  
+            <button type="submit" class="btn btn-default addEventFormBtn">Add event</button>  
         </form>
     </div>
 

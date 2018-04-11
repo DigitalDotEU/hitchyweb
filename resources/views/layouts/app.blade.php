@@ -43,6 +43,14 @@
     <!-- Minified bootstrap JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
+    <script>
+        $(document).ready(function(){
+            setTimeout(function(){
+                $("div.alertRow").remove();
+            }, 7000 ); //remove alert row after 4 seconds
+        });
+    </script>
+
     
     <!-- menu actions/animations -->
     <script>

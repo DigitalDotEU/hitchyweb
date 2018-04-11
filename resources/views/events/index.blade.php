@@ -2,22 +2,22 @@
 
 @section('content')
 <div class="row events">
-    <div class="col-sm-8 col-sm-offset-2 eventsCol">
+    <div class="col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1 eventsCol">
         <h1>Events</h1>
 
         @foreach($res as $event)
             @if($event['submittedByAdmin'] == 1)
                 <div class="well">
-                    <p>Name: {{$event['name']}}</p>
-                    <p>Description: {{$event['description']}}</p>
+                    <?php $pathSingle = '/events/' . $event['id']; ?>
+
+                    <p class="eventName"><a href="{{url($pathSingle)}}">{{$event['name']}}</a></p>
+                    <p>{{$event['description']}}</p>
                     <p>Author: {{$event['author']}}</p>
                     <p>Start place coordinates: {{$event['startPlaceLattitude']}},  {{$event['startPlaceLongitude']}}</p>
                     <p>Stop place coordinates: {{$event['stopPlaceLattitude']}},  {{$event['stopPlaceLongitude']}}</p>
                     <p>Start date: {{$event['startDate']}}</p>
 
-                    <p> id: {{$event['id']}}</p>
-                    <?php $pathSingle = '/events/' . $event['id']; ?>
-                    <a href="{{url($pathSingle)}}"><div class="btn btn-default">Show details</div></a>
+                    
 
                     <?php $userjoined = false; ?>
                     <p>Joined User:
@@ -31,6 +31,8 @@
                             @endif
                         @endforeach
                     </p>
+
+                     <a href="{{url($pathSingle)}}"><div class="btn btn-default eventDetailsBtn">Show details</div></a>
 
                     <!-- invisible form for join event-->
                     @if($event['author'] != Session::get('loggedInUser') && $userjoined == false && Session::get('token'))
@@ -48,17 +50,17 @@
 
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
-                            <button type="submit" class="btn btn-default">Join event!</button>  
+                            <button type="submit" class="btn btn-default joinEventIndexBtn">Join event!</button>  
                         </form>
                     @endif
                 </div>
             @endif
         @endforeach
-
-        @if(Session::get('token'))
-            <a href="{{url('/newEvent')}}"><div class="btn btn-default createEventBtn">Add new Event</div></a>
-        @endif
-
+        
+        
     </div>
+    @if(Session::get('token'))
+        <a href="{{url('/newEvent')}}"><div class="btn btn-default createEventBtn">New Event</div></a>
+    @endif
 </div>
 @endsection

@@ -22,6 +22,8 @@
             <button type="submit" class="btn btn-default">Sign In</button>  
         </form>
 
+        <p>Don't have an account? <span class="bold"><a href="/register">Sign Up<a/></span></p>
+
     </div>
 </div>
 @endsection

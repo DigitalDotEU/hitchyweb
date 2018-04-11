@@ -13,6 +13,10 @@ html {
   height: 100%;
 }
 
+.bold {
+  font-weight: 700;
+}
+
 #wrapper {
   padding-left: 0;
   -webkit-transition: all 0.5s ease;
@@ -262,6 +266,9 @@ html {
 
 #wrapper #page-content-wrapper .container .newEvent .newEventCol h1 {
   text-align: center;
+  padding-bottom: 50px;
+  font-weight: 700;
+  color: #5a5a5a;
 }
 
 #wrapper #page-content-wrapper .container .newEvent .newEventCol form {
@@ -269,12 +276,117 @@ html {
   margin: 0 auto;
 }
 
+#wrapper #page-content-wrapper .container .newEvent .newEventCol form label {
+  font-weight: 500;
+}
+
+#wrapper #page-content-wrapper .container .newEvent .newEventCol form #startPlacePick,
+#wrapper #page-content-wrapper .container .newEvent .newEventCol form #stopPlacePick,
+#wrapper #page-content-wrapper .container .newEvent .newEventCol form .addEventFormBtn {
+  border: 2px solid #ccc;
+  padding: 10px 30px;
+  margin-top: 20px;
+}
+
+#wrapper #page-content-wrapper .container .newEvent .newEventCol form .dateGroup {
+  margin-top: 30px;
+}
+
 #wrapper #page-content-wrapper .container .newEvent .newEventMap {
   height: 100vh;
 }
 
 #wrapper #page-content-wrapper .container .events {
-  padding-top: 100px;
+  padding-top: 40px;
+  position: relative;
+}
+
+#wrapper #page-content-wrapper .container .events .createEventBtn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding-right: 50px;
+  padding-top: 70px;
+  font-size: 20px;
+  width: 200px;
+  text-align: right;
+  font-weight: 700;
+  color: #5a5a5a;
+  border-radius: 0 15px 0 100%;
+  height: 200px;
+  border: none;
+  color: #fff;
+  background-color: #91cbff;
+}
+
+#wrapper #page-content-wrapper .container .events .createEventBtn:hover {
+  color: #e8e8e8;
+  -webkit-transition-duration: 1s;
+          transition-duration: 1s;
+  -webkit-box-shadow: -5px 5px 25px 0px #ebebeb;
+  box-shadow: -5px 5px 25px 0px #ebebeb;
+}
+
+#wrapper #page-content-wrapper .container .events .eventsCol h1 {
+  text-align: center;
+  padding-bottom: 50px;
+  font-weight: 700;
+  color: #5a5a5a;
+}
+
+#wrapper #page-content-wrapper .container .events .eventsCol .well {
+  position: relative;
+  padding: 40px;
+  background-color: #fff;
+  -webkit-box-shadow: 0px 0px 35px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 35px 0px rgba(172, 172, 172, 0.75);
+  border-radius: 15px;
+}
+
+#wrapper #page-content-wrapper .container .events .eventsCol .well .eventName {
+  font-size: 20px;
+  font-weight: 700;
+  padding-bottom: 15px;
+}
+
+#wrapper #page-content-wrapper .container .events .eventsCol .well .eventName a {
+  color: #5a5a5a;
+}
+
+#wrapper #page-content-wrapper .container .events .eventsCol .well .eventName a:hover {
+  color: #ccc;
+  text-decoration: none !important;
+}
+
+#wrapper #page-content-wrapper .container .events .eventsCol .well .eventDetailsBtn {
+  border: 2px solid #ccc;
+  padding: 10px 30px;
+  margin-top: 20px;
+}
+
+#wrapper #page-content-wrapper .container .events .eventsCol .well .joinEventIndexBtn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding-right: 30px;
+  font-size: 20px;
+  width: 200px;
+  text-align: right;
+  font-weight: 700;
+  color: #5a5a5a;
+  border-radius: 0 15px 0 100%;
+  height: 200px;
+  border: none;
+  color: #fff;
+  background-color: #91cbff;
+}
+
+#wrapper #page-content-wrapper .container .events .eventsCol .well .joinEventIndexBtn:hover {
+  color: #e8e8e8;
+  -webkit-transition-duration: 1s;
+          transition-duration: 1s;
+  -webkit-box-shadow: -5px 5px 25px 0px #ebebeb;
+  box-shadow: -5px 5px 25px 0px #ebebeb;
 }
 
 #wrapper #page-content-wrapper .container .register {
@@ -312,6 +424,25 @@ html {
   margin: 0;
 }
 
+#wrapper #page-content-wrapper .container .map .logedInfo {
+  position: absolute;
+  z-index: 4;
+  width: 80%;
+  left: 10%;
+  background-color: #fff;
+  bottom: 10%;
+  font-size: 22px;
+  margin: 0 auto;
+  text-align: center;
+  border: 3px solid #e7e7e7;
+  border-radius: 10px;
+  padding: 20px 0;
+}
+
+#wrapper #page-content-wrapper .container .map .logedInfo p {
+  margin: 0;
+}
+
 #wrapper #page-content-wrapper .container .map .searchForm {
   position: absolute;
   z-index: 2;
@@ -326,36 +457,88 @@ html {
 }
 
 #wrapper #page-content-wrapper .container .map #addPointBtn {
+  display: none;
   position: absolute;
-  z-index: 4;
-  font-size: 70px;
-  bottom: 50px;
-  right: 50px;
-  background: none;
+  top: 0;
+  right: 0;
+  padding-right: 40px;
+  padding-top: 70px;
+  font-size: 20px;
+  width: 200px;
+  text-align: right;
+  font-weight: 700;
+  color: #5a5a5a;
+  border-radius: 0 0 0 100%;
+  height: 200px;
   border: none;
-  color: #91cbff;
+  color: #fff;
+  background-color: #91cbff;
 }
 
 #wrapper #page-content-wrapper .container .map #addPointBtn:hover {
-  color: #a7a7a7;
+  color: #e8e8e8;
+  -webkit-transition-duration: 1s;
+          transition-duration: 1s;
+  -webkit-box-shadow: -5px 5px 25px 0px #ebebeb;
+  box-shadow: -5px 5px 25px 0px #ebebeb;
 }
 
 #wrapper #page-content-wrapper .container .map .panel {
-  width: 100vw;
-  height: 400px;
+  width: 500px;
+  height: 100vh;
   margin: 0;
   position: absolute;
   bottom: 0;
   background-color: #fff;
   display: none;
-  padding: 50px 70px;
+  padding: 60px 70px;
   -webkit-box-shadow: 0px -30px 42px 10px #d4d4d4;
   box-shadow: 0px -30px 42px 10px #d4d4d4;
+}
+
+#wrapper #page-content-wrapper .container .map .panel h1 {
+  text-align: center;
+  padding-bottom: 50px;
+  font-weight: 700;
+  color: #5a5a5a;
 }
 
 #wrapper #page-content-wrapper .container .map .panel p {
   font-size: 16px;
   color: #212121;
+}
+
+#wrapper #page-content-wrapper .container .map .panel .panelComments {
+  margin-top: 40px;
+}
+
+#wrapper #page-content-wrapper .container .map .panel .panelComments h3 {
+  font-weight: 700;
+  color: #5a5a5a;
+  padding-bottom: 10px;
+}
+
+#wrapper #page-content-wrapper .container .map .panel .panelComments .commentSingle {
+  padding-bottom: 20px;
+}
+
+#wrapper #page-content-wrapper .container .map .panel .panelComments .commentSingle .commentBody {
+  padding-left: 20px;
+}
+
+#wrapper #page-content-wrapper .container .map .panel .panelComments .commentSingle:last-child {
+  padding-bottom: 0;
+}
+
+#wrapper #page-content-wrapper .container .map .panel #addComment {
+  margin-top: 50px;
+}
+
+#wrapper #page-content-wrapper .container .map .panel #addComment .addCommentBtn {
+  margin: 0 !important;
+  border: 2px solid #ccc;
+  padding: 10px 30px;
+  margin-top: 20px;
 }
 
 #wrapper #page-content-wrapper .container .map .panel #closePanel {
@@ -371,13 +554,31 @@ html {
 }
 
 #wrapper #page-content-wrapper .container .map .panel2 {
-  width: 100vw;
-  height: 300px;
+  width: 500px;
+  height: 100vh;
   position: absolute;
+  z-index: 3;
   bottom: 0;
   background-color: #fff;
   display: none;
-  padding: 50px 70px;
+  padding: 60px 70px;
+}
+
+#wrapper #page-content-wrapper .container .map .panel2 h1 {
+  text-align: center;
+  padding-bottom: 50px;
+  font-weight: 700;
+  color: #5a5a5a;
+}
+
+#wrapper #page-content-wrapper .container .map .panel2 #addPointForm label {
+  font-weight: 500;
+}
+
+#wrapper #page-content-wrapper .container .map .panel2 #addPointForm .addPointBtn {
+  border: 2px solid #ccc;
+  padding: 10px 30px;
+  margin-top: 20px;
 }
 
 #wrapper #page-content-wrapper .container .map .panel2 p {

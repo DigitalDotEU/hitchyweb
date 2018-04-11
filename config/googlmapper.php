@@ -113,7 +113,7 @@ return [
     | Set if zoom control should be displayed by Googlmapper.
     |
     */
-    'zoomControl' => true,
+    'zoomControl' => false,
 
     /*
     |--------------------------------------------------------------------------

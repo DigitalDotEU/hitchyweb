@@ -14,7 +14,15 @@
     @if(!Session::get('token'))
         <div class="loginInfo">
             <div class="col-sm-8 col-sm-offset-2 loginInfoCol">
-                <p>Please sign in to add new points, comment existing points and many more.</p>
+                <p>Please sign in to add new points, events, comment existing points and many more.</p>
+            </div>
+        </div>
+    @endif
+
+    @if(Session::get('token'))
+        <div class="logedInfo">
+            <div class="col-sm-8 col-sm-offset-2 logedInfoCol">
+                <p>Move the map and add new point by click button in top right area</p>
             </div>
         </div>
     @endif
@@ -24,17 +32,18 @@
         <div class="panelPointHeader"></div>
         <div class="panelPointAddress"></div>
         <div class="panelContent"></div>
+        <div class="panelComments"></div>
 
         @if(Session::get('token'))
              <form id="addComment" method="post" action="{{ action('CommentController@store') }}">
                 <div class="form-group">
-                    <input type="text" class="form-control" id="commentBody" name="commentBody" placeholder="Comment ...">
+                    <input type="text" class="form-control" id="commentBody" name="commentBody" placeholder="Comment ..." required>
                 </div>
 
                 <input class="form-control" id="point_id" name="point_id" type="hidden">
 
                 <input name="_token" type="hidden" value="{{ csrf_token() }}"/>
-                <button type="submit" class="btn btn-primary">Add Comment</button>
+                <button type="submit" class="btn btn-default addCommentBtn">Add Comment</button>
             </form>
         @endif
     </div>
@@ -42,12 +51,13 @@
     <!-- display add new point only for logged in users -->
     @if(Session::get('token'))
         <div class="panel2">
+            <h1>Add new point</h1>
             <form id="addPointForm" method="post" action="{{ action('PointController@store') }}">
                 <div class="form-group">
-                    <input type="text" class="form-control" id="pointName" name="pointName" placeholder="Point name">
+                    <input type="text" class="form-control" id="pointName" name="pointName" placeholder="Point name" required>
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control" id="pointDescription" name="pointDescription" placeholder="Point description">
+                    <input type="text" class="form-control" id="pointDescription" name="pointDescription" placeholder="Point description" required>
                 </div>
                 <div class="form-group" style="display: none;">
                     <input type="text" class="form-control" id="lattitude" name="lattitude" value="">
@@ -76,14 +86,14 @@
                     </select>
                 </div>
                 <input name="_token" type="hidden" value="{{ csrf_token() }}"/>
-                <button type="submit" class="btn btn-primary">Add point</button>
+                <button type="submit" class="btn btn-default addPointBtn">Add point</button>
             </form>
 
             <div id="closePanel2">
                 <i class="fas fa-times"></i>
             </div>                           
         </div>
-        <div class="btn btn-default" id="addPointBtn"><i class="fas fa-plus-circle"></i></div>
+        <div class="btn btn-default" id="addPointBtn">New Point</div>
     @endif
 
 </div>
@@ -96,6 +106,8 @@
         //close add new point panel
         $('#closePanel2').click(function(){ 
             $('.panel2').css('display', 'none'); 
+            $(".logedInfo").css('display', 'block');
+            $(".searchForm").css('display', 'block');
             $("#addPointBtn").css('display', 'block');
         });
 
@@ -141,14 +153,16 @@
 
         //add new point based on user click map position when user click on map-canvas-0
         document.getElementById('map-canvas-0').onclick = function(){
+            $( "#addPointBtn" ).css('display', 'block');
             //get cursor position on map 
-            //$("#addPointBtn").css('display', 'block');
-
             //when user click addPointBtn create draggable marker and update lat and lng when user drag marker, dont display plus button to prevent 
             //creating few markers. display panel div to display data inside of that.
             $( "#addPointBtn" ).click(function() {
                 $(".panel").css('display', 'none');
+                $(".logedInfo").css('display', 'none');
+                $(".searchForm").css('display', 'none');
                 $("#addPointBtn").css('display', 'none');
+
                 var ctr = map.getCenter();
                 var lt = ctr.lat();
                 var lng = ctr.lng();
@@ -157,9 +171,6 @@
 
                 $('#lattitude').val(lt);
                 $('#longitude').val(lng);
-
-                console.log(lt);
-                console.log(lng);
 
                 //after click add new point create draggable marker to work with
                 var marker = new google.maps.Marker({

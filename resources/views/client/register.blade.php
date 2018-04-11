@@ -45,6 +45,8 @@
             <button type="submit" class="btn btn-default">Sign Up</button>
         </form>
 
+        <p>Already have an account? <span class="bold"><a href="/login">Log in<a/></span></p>
+
     </div>
 </div>
 @endsection

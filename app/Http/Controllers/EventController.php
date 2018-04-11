@@ -44,7 +44,8 @@ class EventController extends Controller
             [
                 'eventAfterLoad' => '',
                 'eventBeforeLoad' => 'newEvent(map);',
-                'zoom' => 5
+                'zoom' => 5,
+                'marker' => false
             ]
         );
 
