@@ -230,6 +230,40 @@ html { height: 100%;}
                         width: 70%;
                         margin: 70px auto;
 
+                        h1{
+                            text-align: center;
+                            padding-bottom: 50px;
+                            font-weight: 700;
+                            color: #5a5a5a;
+                        }
+                        h3
+                        {font-weight: 700;
+                            color: #5a5a5a;
+                            padding-bottom: 10px;
+                        }
+                        .eventComments{
+                            margin-top: 40px;
+
+                            .eventSingleComment {
+                                padding-bottom: 20px;
+
+                                .commentBody {
+                                    padding-left: 20px;
+                                }
+                            }
+                            .commentForm{
+                                margin-top: 20px;
+    
+                                .commentBtn{
+                                    border: 2px solid #ccc;
+                                    padding: 10px 30px;
+                                    margin-top: 10px;
+                                } 
+                            }
+                        }
+
+                        
+                        
                         #startPlaceLattitude, #startPlaceLongitude, #stopPlaceLattitude, #stopPlaceLongitude{
                             display: none;
                         }
@@ -237,6 +271,10 @@ html { height: 100%;}
                 }
                 .eventPointMap{
                     height: 100vh;
+
+                    #map-canvas-0{
+                        position: fixed !important;
+                    }
                 }
             }
 
@@ -363,12 +401,76 @@ html { height: 100%;}
         
             .register{
                 width: 100vw;
-                padding-top: 100px;
+                min-height: 100vh;
+                background-image: url('/images/logoBg.png');
+                padding-top: 50px;
+                margin: 0;
+                background-repeat: no-repeat;
+                background-position-y: 100%;
+                background-position-x: 100%;
+                background-size: 50%;
+
+                h2{
+                    text-align: center;
+                    padding-bottom: 50px;
+                    font-weight: 700;
+                    color: #5a5a5a;
+                }
+                label{
+                    color: #5a5a5a;
+                }
+                .registerBtn{
+                    border: 2px solid #ccc;
+                    padding: 10px 30px;
+                }
+                p{
+                    padding-top: 20px;
+
+                    a{
+                        color: #5a5a5a;
+                    }
+                    a:hover{
+                        color: #ccc;
+                        text-decoration: none!important;
+                    }
+                }
             }
         
             .login{
                 width: 100vw;
-                padding-top: 100px;
+                height: 100vh;
+                background-image: url('/images/logoBg.png');
+                padding-top: 50px;
+                margin: 0;
+                background-repeat: no-repeat;
+                background-position-y: 100%;
+                background-position-x: 100%;
+                background-size: 50%;
+
+                h2{
+                    text-align: center;
+                    padding-bottom: 50px;
+                    font-weight: 700;
+                    color: #5a5a5a;
+                }
+                label{
+                    color: #5a5a5a;
+                }
+                .loginBtn{
+                    border: 2px solid #ccc;
+                    padding: 10px 30px;
+                }
+                p{
+                    padding-top: 20px;
+
+                    a{
+                        color: #5a5a5a;
+                    }
+                    a:hover{
+                        color: #ccc;
+                        text-decoration: none!important;
+                    }
+                }
             }
         
             .map{
@@ -577,7 +679,14 @@ html { height: 100%;}
         
             .profile{
                 width: 100vw;
-                padding-top: 100px;
+                height: 100vh;
+                background-image: url('/images/logoBg.png');
+                padding-top: 50px;
+                margin: 0;
+                background-repeat: no-repeat;
+                background-position-y: 100%;
+                background-position-x: 100%;
+                background-size: 50%;
             }
         }
     }

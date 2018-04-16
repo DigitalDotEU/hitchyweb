@@ -6,8 +6,8 @@
 
             @if($res['submittedByAdmin'] == 1)
                 <div class="single">
-                    <p>Name: {{$res['name']}}</p>
-                    <p>Description: {{$res['description']}}</p>
+                    <h1 class="pointName">{{$res['name']}}</h1>
+                    <p>{{$res['description']}}</p>
                     <p>Author: {{$res['author']}}</p>
 
                     <div class="eventAddress"></div>
@@ -37,19 +37,19 @@
                         @foreach ($res3 as $comment)
                             <div class="eventSingleComment">
                                 <p>{{$comment['user_email']}} commented {{$comment['created_at']}}:</p>
-                                <p>{{$comment['body']}}</p>
+                                <p class="commentBody">{{$comment['body']}}</p>
                             </div>
                         @endforeach
 
                         @if (Session::get('token'))
-                            <form method="post" action="{{ action('EventController@eventCommentStore') }}">
-                                <input type="text" class="form-control" id="body" name="body">
+                            <form method="post" class="commentForm" action="{{ action('EventController@eventCommentStore') }}">
+                                <input type="text" class="form-control" id="body" name="body" placeholder="Comment that event...">
                                 <input type="hidden" class="form-control" id="user_id" name="user_id" value="{{Session::get('userID')}}">
                                 <input type="hidden" class="form-control" id="user_email" name="user_email" value="{{Session::get('loggedInUser')}}">
                                 <input type="hidden" class="form-control" id="event_id" name="event_id" value="{{$res['id']}}">
 
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                <button type="submit" class="btn btn-default">Comment</button>  
+                                <button type="submit" class="btn btn-default commentBtn">Comment</button>  
                             </form>
                         @endif    
                     </div>

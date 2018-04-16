@@ -249,6 +249,41 @@ html {
   margin: 70px auto;
 }
 
+#wrapper #page-content-wrapper .container .eventSingle .eventSingleCol .single h1 {
+  text-align: center;
+  padding-bottom: 50px;
+  font-weight: 700;
+  color: #5a5a5a;
+}
+
+#wrapper #page-content-wrapper .container .eventSingle .eventSingleCol .single h3 {
+  font-weight: 700;
+  color: #5a5a5a;
+  padding-bottom: 10px;
+}
+
+#wrapper #page-content-wrapper .container .eventSingle .eventSingleCol .single .eventComments {
+  margin-top: 40px;
+}
+
+#wrapper #page-content-wrapper .container .eventSingle .eventSingleCol .single .eventComments .eventSingleComment {
+  padding-bottom: 20px;
+}
+
+#wrapper #page-content-wrapper .container .eventSingle .eventSingleCol .single .eventComments .eventSingleComment .commentBody {
+  padding-left: 20px;
+}
+
+#wrapper #page-content-wrapper .container .eventSingle .eventSingleCol .single .eventComments .commentForm {
+  margin-top: 20px;
+}
+
+#wrapper #page-content-wrapper .container .eventSingle .eventSingleCol .single .eventComments .commentForm .commentBtn {
+  border: 2px solid #ccc;
+  padding: 10px 30px;
+  margin-top: 10px;
+}
+
 #wrapper #page-content-wrapper .container .eventSingle .eventSingleCol .single #startPlaceLattitude,
 #wrapper #page-content-wrapper .container .eventSingle .eventSingleCol .single #startPlaceLongitude,
 #wrapper #page-content-wrapper .container .eventSingle .eventSingleCol .single #stopPlaceLattitude,
@@ -258,6 +293,10 @@ html {
 
 #wrapper #page-content-wrapper .container .eventSingle .eventPointMap {
   height: 100vh;
+}
+
+#wrapper #page-content-wrapper .container .eventSingle .eventPointMap #map-canvas-0 {
+  position: fixed !important;
 }
 
 #wrapper #page-content-wrapper .container .newEvent .newEventCol {
@@ -391,12 +430,84 @@ html {
 
 #wrapper #page-content-wrapper .container .register {
   width: 100vw;
-  padding-top: 100px;
+  min-height: 100vh;
+  background-image: url("/images/logoBg.png");
+  padding-top: 50px;
+  margin: 0;
+  background-repeat: no-repeat;
+  background-position-y: 100%;
+  background-position-x: 100%;
+  background-size: 50%;
+}
+
+#wrapper #page-content-wrapper .container .register h2 {
+  text-align: center;
+  padding-bottom: 50px;
+  font-weight: 700;
+  color: #5a5a5a;
+}
+
+#wrapper #page-content-wrapper .container .register label {
+  color: #5a5a5a;
+}
+
+#wrapper #page-content-wrapper .container .register .registerBtn {
+  border: 2px solid #ccc;
+  padding: 10px 30px;
+}
+
+#wrapper #page-content-wrapper .container .register p {
+  padding-top: 20px;
+}
+
+#wrapper #page-content-wrapper .container .register p a {
+  color: #5a5a5a;
+}
+
+#wrapper #page-content-wrapper .container .register p a:hover {
+  color: #ccc;
+  text-decoration: none !important;
 }
 
 #wrapper #page-content-wrapper .container .login {
   width: 100vw;
-  padding-top: 100px;
+  height: 100vh;
+  background-image: url("/images/logoBg.png");
+  padding-top: 50px;
+  margin: 0;
+  background-repeat: no-repeat;
+  background-position-y: 100%;
+  background-position-x: 100%;
+  background-size: 50%;
+}
+
+#wrapper #page-content-wrapper .container .login h2 {
+  text-align: center;
+  padding-bottom: 50px;
+  font-weight: 700;
+  color: #5a5a5a;
+}
+
+#wrapper #page-content-wrapper .container .login label {
+  color: #5a5a5a;
+}
+
+#wrapper #page-content-wrapper .container .login .loginBtn {
+  border: 2px solid #ccc;
+  padding: 10px 30px;
+}
+
+#wrapper #page-content-wrapper .container .login p {
+  padding-top: 20px;
+}
+
+#wrapper #page-content-wrapper .container .login p a {
+  color: #5a5a5a;
+}
+
+#wrapper #page-content-wrapper .container .login p a:hover {
+  color: #ccc;
+  text-decoration: none !important;
 }
 
 #wrapper #page-content-wrapper .container .map {
@@ -620,7 +731,14 @@ html {
 
 #wrapper #page-content-wrapper .container .profile {
   width: 100vw;
-  padding-top: 100px;
+  height: 100vh;
+  background-image: url("/images/logoBg.png");
+  padding-top: 50px;
+  margin: 0;
+  background-repeat: no-repeat;
+  background-position-y: 100%;
+  background-position-x: 100%;
+  background-size: 50%;
 }
 
 #wrapper.toggled {

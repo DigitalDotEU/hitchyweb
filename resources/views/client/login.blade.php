@@ -19,7 +19,7 @@
 
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
-            <button type="submit" class="btn btn-default">Sign In</button>  
+            <button type="submit" class="btn btn-default loginBtn">Sign In</button>  
         </form>
 
         <p>Don't have an account? <span class="bold"><a href="/register">Sign Up<a/></span></p>
