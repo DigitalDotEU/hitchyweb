@@ -28,7 +28,7 @@ class LoginController extends Controller
                 'body' => json_encode($body)
             ]);
         }catch (\Exception $e) {
-            Session::flash('Error', $e);
+            Session::flash('Error', $e->getMessage());
             return Redirect::to('/index');
         }
 
