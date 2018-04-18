@@ -27,17 +27,17 @@ class PointController extends Controller
 
         //get point content
         $client = new Client();
-        $res = $client->request('GET', 'http://127.0.0.1:8080/api/points');
+        $res = $client->request('GET', 'https://hitchyapi.herokuapp.com/api/points');
         $res = json_decode($res->getBody(), true);
 
         //get comments content
         $client2 = new Client();
-        $res2 = $client2->request('GET', 'http://127.0.0.1:8080/api/comments');
+        $res2 = $client2->request('GET', 'https://hitchyapi.herokuapp.com/api/comments');
         $res2 = json_decode($res2->getBody(), true);
 
         //get users content
         $client3 = new Client();
-        $res3 = $client3->request('GET', 'http://127.0.0.1:8080/api/users');
+        $res3 = $client3->request('GET', 'https://hitchyapi.herokuapp.com/api/users');
         $res3 = json_decode($res3->getBody(), true);
         
         foreach($res as $point){
@@ -147,7 +147,7 @@ class PointController extends Controller
 
         $client = new \GuzzleHttp\Client();
         try{
-            $response = $client->request('POST', 'http://127.0.0.1:8080/api/point', [
+            $response = $client->request('POST', 'https://hitchyapi.herokuapp.com/api/point', [
                 'headers' => ['Content-Type' => 'application/json'],
                 'body' => json_encode($body)
 

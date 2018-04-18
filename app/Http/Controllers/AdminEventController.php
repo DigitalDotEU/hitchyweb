@@ -15,7 +15,7 @@ class AdminEventController extends Controller
     {
         //list of all events
         $client = new Client();
-        $res = $client->request('GET', 'http://127.0.0.1:8080/api/events');
+        $res = $client->request('GET', 'https://hitchyapi.herokuapp.com/api/events');
         $res = json_decode($res->getBody(), true);
 
         //dd($res);
@@ -29,11 +29,11 @@ class AdminEventController extends Controller
 
         //post request to api sending event id to increment(submit) that event in api
         $client = new Client();
-        $client->request('POST', 'http://127.0.0.1:8080/api/adminEventSubmit/' . $id);
+        $client->request('POST', 'https://hitchyapi.herokuapp.com/api/adminEventSubmit/' . $id);
 
         //return again events list
         $client2 = new Client();
-        $res = $client2->request('GET', 'http://127.0.0.1:8080/api/events');
+        $res = $client2->request('GET', 'https://hitchyapi.herokuapp.com/api/events');
         $res = json_decode($res->getBody(), true);
 
         Session::flash('Success', "You sumbitted event wth id " . $id);

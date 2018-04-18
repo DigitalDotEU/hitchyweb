@@ -29,7 +29,7 @@ class RegisterController extends Controller
 
         $client = new \GuzzleHttp\Client();
         try{
-            $response = $client->request('POST', 'http://127.0.0.1:8080/api/register', [
+            $response = $client->request('POST', 'https://hitchyapi.herokuapp.com/api/register', [
                 'headers' => ['Content-Type' => 'application/json'],
                 'body' => json_encode($body)
 

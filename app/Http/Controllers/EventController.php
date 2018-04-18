@@ -17,12 +17,12 @@ class EventController extends Controller
     public function index(){
         //get all events which author==joinedUser
         $client = new Client();
-        $res = $client->request('GET', 'http://127.0.0.1:8080/api/events');
+        $res = $client->request('GET', 'https://hitchyapi.herokuapp.com/api/events');
         $res = json_decode($res->getBody(), true);
 
         //get all events
         $client2 = new Client();
-        $res2 = $client2->request('GET', 'http://127.0.0.1:8080/api/allEvents');
+        $res2 = $client2->request('GET', 'https://hitchyapi.herokuapp.com/api/allEvents');
         $res2 = json_decode($res2->getBody(), true);
 
         $joinedUsers = array();
@@ -82,7 +82,7 @@ class EventController extends Controller
 
         $client = new \GuzzleHttp\Client();
         try{
-            $response = $client->request('POST', 'http://127.0.0.1:8080/api/events', [
+            $response = $client->request('POST', 'https://hitchyapi.herokuapp.com/api/events', [
                 'headers' => ['Content-Type' => 'application/json'],
                 'body' => json_encode($body)
 
@@ -117,7 +117,7 @@ class EventController extends Controller
        
         $client = new \GuzzleHttp\Client();
         try{
-            $response = $client->request('POST', 'http://127.0.0.1:8080/api/eventComments', [
+            $response = $client->request('POST', 'https://hitchyapi.herokuapp.com/api/eventComments', [
                 'headers' => ['Content-Type' => 'application/json'],
                 'body' => json_encode($body)
 
@@ -134,17 +134,17 @@ class EventController extends Controller
     public function show($id){
         //get event with $id = id
         $client = new Client();
-        $res = $client->request('GET', 'http://127.0.0.1:8080/api/events/' . $id);
+        $res = $client->request('GET', 'https://hitchyapi.herokuapp.com/api/events/' . $id);
         $res = json_decode($res->getBody(), true);
 
         //get all events
         $client2 = new Client();
-        $res2 = $client2->request('GET', 'http://127.0.0.1:8080/api/allEvents');
+        $res2 = $client2->request('GET', 'https://hitchyapi.herokuapp.com/api/allEvents');
         $res2 = json_decode($res2->getBody(), true);
 
         //get comments for event
         $client3 = new Client();
-        $res3 = $client3->request('GET', 'http://127.0.0.1:8080/api/eventComments/' . $id);
+        $res3 = $client3->request('GET', 'https://hitchyapi.herokuapp.com/api/eventComments/' . $id);
         $res3 = json_decode($res3->getBody(), true);
         
         $joinedUsers = array();

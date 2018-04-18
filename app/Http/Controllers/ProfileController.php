@@ -19,7 +19,7 @@ class ProfileController extends Controller
 
         $client = new \GuzzleHttp\Client();
         try{
-            $response = $client->request('POST', 'http://127.0.0.1:8080/api/get-details', [
+            $response = $client->request('POST', 'https://hitchyapi.herokuapp.com/api/get-details', [
                 'headers' => ['Accept' => 'application/json', 'Authorization' => $authorization],
             ]);   
         }catch (\Exception $e) {
