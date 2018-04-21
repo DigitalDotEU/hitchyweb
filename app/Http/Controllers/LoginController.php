@@ -23,7 +23,7 @@ class LoginController extends Controller
 
         $client = new \GuzzleHttp\Client();
         try{
-            $response = $client->request('POST', 'https://hitchyapi.herokuapp.com/api/login', [
+            $response = $client->request('POST', 'http://phplaravel-169259-488708.cloudwaysapps.com/api/login', [
                 'headers' => ['Content-Type' => 'application/json'],
                 'body' => json_encode($body)
             ]);

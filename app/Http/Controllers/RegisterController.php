@@ -29,7 +29,7 @@ class RegisterController extends Controller
 
         $client = new \GuzzleHttp\Client();
         try{
-            $response = $client->request('POST', 'https://hitchyapi.herokuapp.com/api/register', [
+            $response = $client->request('POST', 'http://phplaravel-169259-488708.cloudwaysapps.com/api/register', [
                 'headers' => ['Content-Type' => 'application/json'],
                 'body' => json_encode($body)
 

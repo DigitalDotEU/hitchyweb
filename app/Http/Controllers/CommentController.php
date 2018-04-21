@@ -31,7 +31,7 @@ class CommentController extends Controller
 
         $client = new \GuzzleHttp\Client();
         try{
-            $response = $client->request('POST', 'https://hitchyapi.herokuapp.com/api/comment', [
+            $response = $client->request('POST', 'http://phplaravel-169259-488708.cloudwaysapps.com/api/comment', [
                 'headers' => ['Content-Type' => 'application/json'],
                 'body' => json_encode($body)
 

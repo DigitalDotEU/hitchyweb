@@ -19,7 +19,7 @@ class ProfileController extends Controller
 
         $client = new \GuzzleHttp\Client();
         try{
-            $response = $client->request('POST', 'https://hitchyapi.herokuapp.com/api/get-details', [
+            $response = $client->request('POST', 'http://phplaravel-169259-488708.cloudwaysapps.com/api/get-details', [
                 'headers' => ['Accept' => 'application/json', 'Authorization' => $authorization],
             ]);   
         }catch (\Exception $e) {

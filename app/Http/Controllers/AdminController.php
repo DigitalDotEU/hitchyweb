@@ -15,7 +15,7 @@ class AdminController extends Controller
     {
         //list of all points
         $client = new Client();
-        $res = $client->request('GET', 'https://hitchyapi.herokuapp.com/api/points');
+        $res = $client->request('GET', 'http://phplaravel-169259-488708.cloudwaysapps.com/api/points');
         $res = json_decode($res->getBody(), true);
 
         //dd($res);
@@ -29,11 +29,11 @@ class AdminController extends Controller
 
         //post request to api sending point id to increment(submit) that point in api
         $client = new Client();
-        $client->request('POST', 'https://hitchyapi.herokuapp.com/api/adminSubmit/' . $id);
+        $client->request('POST', 'http://phplaravel-169259-488708.cloudwaysapps.com/api/adminSubmit/' . $id);
 
         //return again points list
         $client2 = new Client();
-        $res = $client2->request('GET', 'https://hitchyapi.herokuapp.com/api/points');
+        $res = $client2->request('GET', 'http://phplaravel-169259-488708.cloudwaysapps.com/api/points');
         $res = json_decode($res->getBody(), true);
 
         Session::flash('Success', "You sumbitted point wth id " . $id);
