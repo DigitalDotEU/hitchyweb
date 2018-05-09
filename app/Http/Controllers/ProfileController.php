@@ -18,8 +18,11 @@ class ProfileController extends Controller
         $authorization = 'Bearer ' . $token;
 
         $client = new \GuzzleHttp\Client();
+
+        $address = $this->apiAddress . '/api/get-details';
+
         try{
-            $response = $client->request('POST', 'http://phplaravel-169259-488708.cloudwaysapps.com/api/get-details', [
+            $response = $client->request('POST', $address, [
                 'headers' => ['Accept' => 'application/json', 'Authorization' => $authorization],
             ]);   
         }catch (\Exception $e) {

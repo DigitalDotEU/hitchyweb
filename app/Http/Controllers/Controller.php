@@ -10,4 +10,13 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+    public $apiAddress;
+
+    public function __construct()
+    {
+
+        //set variable to use in other controllers only extension of url
+        $this->apiAddress = 'http://phplaravel-169259-488708.cloudwaysapps.com';
+    }
 }

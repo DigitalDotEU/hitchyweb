@@ -27,6 +27,37 @@
         </div>
     @endif
 
+    <div class="placesButtonsPanel">
+        <div id="gasStationsBtn">
+            <p>Gas stations<span class="arrow"></span></p>
+            <div class="imageDiv">
+                <img src="{{ URL::to('/') }}/images/gasStation.png">
+            </div>
+        </div>
+
+        <div id="supermarketBtn">
+            <p>Supermarkets</p>
+            <div class="imageDiv">
+                <img src="{{ URL::to('/') }}/images/supermarket.png">
+            </div>
+            
+        </div>
+
+        <div id="trainStationsBtn">
+            <p>Train stations</p>
+            <div class="imageDiv">
+                <img src="{{ URL::to('/') }}/images/trainStation.png">  
+            </div>
+        </div>
+
+        <div id="bankBtn">
+            <p>Bank places</p>
+            <div class="imageDiv">
+                <img src="{{ URL::to('/') }}/images/bank.png">
+            </div>
+        </div>
+    </div>
+
     <div class="panel">
     
         <div class="panelPointHeader"></div>
@@ -111,6 +142,15 @@
             $("#addPointBtn").css('display', 'block');
         });
 
+
+
+        $('.placesButtonsPanel > div').mouseover(function(){
+            $(this).find("p").css('display',  'inline-block');
+        });
+        $('.placesButtonsPanel > div').mouseout(function(){
+            $(this).find("p").css('display',  'none');
+        });
+
         //init geocoder
         var geocoder = new google.maps.Geocoder();
 
@@ -150,6 +190,221 @@
             ].join(' ');
           }
         });
+
+
+
+        /* ==========================================
+
+                    GAS STATION BUTTON 
+
+        ===========================================*/
+        document.getElementById('gasStationsBtn').onclick = function(){
+            //get cursor coordinates
+            var ctr = map.getCenter();
+            var lt = ctr.lat();
+            var lng = ctr.lng();
+            var myLatLng = {lat: lt, lng: lng};
+
+            console.log(myLatLng.lat);
+
+            //search nearby service type=gas_station
+            var service = new google.maps.places.PlacesService(map);
+            service.nearbySearch({
+                location: myLatLng,
+                radius: 10000,
+                type: ['gas_station']
+            }, callback);
+
+            //init infoWindow
+            var infowindow = new google.maps.InfoWindow();
+
+            function callback(results, status) {
+                if (status === google.maps.places.PlacesServiceStatus.OK) {
+                    //for all results create markers and infowindows
+                    for (var i = 0; i < results.length; i++) {
+
+                        let LatLng = {lat: results[i].geometry.location.lat(), lng: results[i].geometry.location.lng()};
+
+                        let marker = new google.maps.Marker({
+                            position: LatLng,
+                            map: map,
+                            draggable: true
+                        });
+
+                        console.log(results[i]);
+                        let stationAddress = results[i].vicinity;
+                        let stationName = results[i].name;
+
+                        google.maps.event.addListener(marker, 'click', function() {
+                            infowindow.setContent(stationName + "<br>" + stationAddress);
+                            infowindow.open(map, marker);
+                        });
+                    }
+                }
+            }
+        }
+
+
+
+        /* ==========================================
+
+                    SUPERMARKET BUTTON 
+
+        ===========================================*/
+        document.getElementById('supermarketBtn').onclick = function(){
+            //get cursor coordinates
+            var ctr = map.getCenter();
+            var lt = ctr.lat();
+            var lng = ctr.lng();
+            var myLatLng = {lat: lt, lng: lng};
+
+            console.log(myLatLng.lat);
+
+            //search nearby service type=gas_station
+            var service = new google.maps.places.PlacesService(map);
+            service.nearbySearch({
+                location: myLatLng,
+                radius: 10000,
+                type: ['supermarket']
+            }, callback);
+
+            //init infoWindow
+            var infowindow = new google.maps.InfoWindow();
+
+            function callback(results, status) {
+                if (status === google.maps.places.PlacesServiceStatus.OK) {
+                    //for all results create markers and infowindows
+                    for (var i = 0; i < results.length; i++) {
+
+                        let LatLng = {lat: results[i].geometry.location.lat(), lng: results[i].geometry.location.lng()};
+
+                        let marker = new google.maps.Marker({
+                            position: LatLng,
+                            map: map,
+                            draggable: true
+                        });
+
+                        console.log(results[i]);
+                        let stationAddress = results[i].vicinity;
+                        let stationName = results[i].name;
+
+                        google.maps.event.addListener(marker, 'click', function() {
+                            infowindow.setContent(stationName + "<br>" + stationAddress);
+                            infowindow.open(map, marker);
+                        });
+                    }
+                }
+            }
+        }
+
+
+
+        /* ==========================================
+
+                    TRAIN STATION BUTTON 
+
+        ===========================================*/
+        document.getElementById('trainStationsBtn').onclick = function(){
+            //get cursor coordinates
+            var ctr = map.getCenter();
+            var lt = ctr.lat();
+            var lng = ctr.lng();
+            var myLatLng = {lat: lt, lng: lng};
+
+            console.log(myLatLng.lat);
+
+            //search nearby service type=gas_station
+            var service = new google.maps.places.PlacesService(map);
+            service.nearbySearch({
+                location: myLatLng,
+                radius: 10000,
+                type: ['train_station']
+            }, callback);
+
+            //init infoWindow
+            var infowindow = new google.maps.InfoWindow();
+
+            function callback(results, status) {
+                if (status === google.maps.places.PlacesServiceStatus.OK) {
+                    //for all results create markers and infowindows
+                    for (var i = 0; i < results.length; i++) {
+
+                        let LatLng = {lat: results[i].geometry.location.lat(), lng: results[i].geometry.location.lng()};
+
+                        let marker = new google.maps.Marker({
+                            position: LatLng,
+                            map: map,
+                            draggable: true
+                        });
+
+                        console.log(results[i]);
+                        let stationAddress = results[i].vicinity;
+                        let stationName = results[i].name;
+
+                        google.maps.event.addListener(marker, 'click', function() {
+                            infowindow.setContent(stationName + "<br>" + stationAddress);
+                            infowindow.open(map, marker);
+                        });
+                    }
+                }
+            }
+        }
+
+
+
+        /* ==========================================
+
+                    BANK BUTTON 
+
+        ===========================================*/
+        document.getElementById('bankBtn').onclick = function(){
+            //get cursor coordinates
+            var ctr = map.getCenter();
+            var lt = ctr.lat();
+            var lng = ctr.lng();
+            var myLatLng = {lat: lt, lng: lng};
+
+            console.log(myLatLng.lat);
+
+            //search nearby service type=gas_station
+            var service = new google.maps.places.PlacesService(map);
+            service.nearbySearch({
+                location: myLatLng,
+                radius: 10000,
+                type: ['bank']
+            }, callback);
+
+            //init infoWindow
+            var infowindow = new google.maps.InfoWindow();
+
+            function callback(results, status) {
+                if (status === google.maps.places.PlacesServiceStatus.OK) {
+                    //for all results create markers and infowindows
+                    for (var i = 0; i < results.length; i++) {
+
+                        let LatLng = {lat: results[i].geometry.location.lat(), lng: results[i].geometry.location.lng()};
+
+                        let marker = new google.maps.Marker({
+                            position: LatLng,
+                            map: map,
+                            draggable: true
+                        });
+
+                        console.log(results[i]);
+                        let stationAddress = results[i].vicinity;
+                        let stationName = results[i].name;
+
+                        google.maps.event.addListener(marker, 'click', function() {
+                            infowindow.setContent(stationName + "<br>" + stationAddress);
+                            infowindow.open(map, marker);
+                        });
+                    }
+                }
+            }
+        }
+
+
+
 
         //add new point based on user click map position when user click on map-canvas-0
         document.getElementById('map-canvas-0').onclick = function(){

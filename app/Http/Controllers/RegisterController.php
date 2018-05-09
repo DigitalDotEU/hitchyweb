@@ -28,8 +28,11 @@ class RegisterController extends Controller
         $body['password'] = $request->input('password');
 
         $client = new \GuzzleHttp\Client();
+
+        $address = $this->apiAddress . '/api/register';
+
         try{
-            $response = $client->request('POST', 'http://phplaravel-169259-488708.cloudwaysapps.com/api/register', [
+            $response = $client->request('POST', $address, [
                 'headers' => ['Content-Type' => 'application/json'],
                 'body' => json_encode($body)
 

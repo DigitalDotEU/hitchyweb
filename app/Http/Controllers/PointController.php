@@ -27,17 +27,20 @@ class PointController extends Controller
 
         //get point content
         $client = new Client();
-        $res = $client->request('GET', 'http://phplaravel-169259-488708.cloudwaysapps.com/api/points');
+        $address = $this->apiAddress . '/api/points';
+        $res = $client->request('GET', $address);
         $res = json_decode($res->getBody(), true);
 
         //get comments content
         $client2 = new Client();
-        $res2 = $client2->request('GET', 'http://phplaravel-169259-488708.cloudwaysapps.com/api/comments');
+        $address2 = $this->apiAddress . '/api/comments';
+        $res2 = $client2->request('GET', $address2);
         $res2 = json_decode($res2->getBody(), true);
 
         //get users content
         $client3 = new Client();
-        $res3 = $client3->request('GET', 'http://phplaravel-169259-488708.cloudwaysapps.com/api/users');
+        $address3 = $this->apiAddress . '/api/users';
+        $res3 = $client3->request('GET', $address3);
         $res3 = json_decode($res3->getBody(), true);
         
         foreach($res as $point){
@@ -146,8 +149,9 @@ class PointController extends Controller
         $body['author'] = $token = Session::get('loggedInUser');;
 
         $client = new \GuzzleHttp\Client();
+        $address = $this->apiAddress . '/api/point';
         try{
-            $response = $client->request('POST', 'http://phplaravel-169259-488708.cloudwaysapps.com/api/point', [
+            $response = $client->request('POST', $address, [
                 'headers' => ['Content-Type' => 'application/json'],
                 'body' => json_encode($body)
 

@@ -30,8 +30,9 @@ class CommentController extends Controller
         $body['user_id'] = $token = Session::get('userID');
 
         $client = new \GuzzleHttp\Client();
+        $address = $this->apiAddress . '/api/comment';
         try{
-            $response = $client->request('POST', 'http://phplaravel-169259-488708.cloudwaysapps.com/api/comment', [
+            $response = $client->request('POST', $address, [
                 'headers' => ['Content-Type' => 'application/json'],
                 'body' => json_encode($body)
 

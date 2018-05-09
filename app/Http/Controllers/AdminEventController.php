@@ -15,7 +15,8 @@ class AdminEventController extends Controller
     {
         //list of all events
         $client = new Client();
-        $res = $client->request('GET', 'http://phplaravel-169259-488708.cloudwaysapps.com/api/events');
+        $address = $this->apiAddress . '/api/events';
+        $res = $client->request('GET', $address);
         $res = json_decode($res->getBody(), true);
 
         //dd($res);
@@ -29,11 +30,13 @@ class AdminEventController extends Controller
 
         //post request to api sending event id to increment(submit) that event in api
         $client = new Client();
-        $client->request('POST', 'http://phplaravel-169259-488708.cloudwaysapps.com/api/adminEventSubmit/' . $id);
+        $address = $this->apiAddress . '/api/adminEventSubmit/';
+        $client->request('POST', $address . $id);
 
         //return again events list
         $client2 = new Client();
-        $res = $client2->request('GET', 'http://phplaravel-169259-488708.cloudwaysapps.com/api/events');
+        $address2 = $this->apiAddress . '/api/events';
+        $res = $client2->request('GET', $address2);
         $res = json_decode($res->getBody(), true);
 
         Session::flash('Success', "You sumbitted event wth id " . $id);

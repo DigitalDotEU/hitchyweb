@@ -15,7 +15,8 @@ class AdminController extends Controller
     {
         //list of all points
         $client = new Client();
-        $res = $client->request('GET', 'http://phplaravel-169259-488708.cloudwaysapps.com/api/points');
+        $address = $this->apiAddress . '/api/points';
+        $res = $client->request('GET', $address);
         $res = json_decode($res->getBody(), true);
 
         //dd($res);
@@ -29,11 +30,13 @@ class AdminController extends Controller
 
         //post request to api sending point id to increment(submit) that point in api
         $client = new Client();
-        $client->request('POST', 'http://phplaravel-169259-488708.cloudwaysapps.com/api/adminSubmit/' . $id);
+        $address = $this->apiAddress . '/api/adminSubmit/';
+        $client->request('POST', $address . $id);
 
         //return again points list
         $client2 = new Client();
-        $res = $client2->request('GET', 'http://phplaravel-169259-488708.cloudwaysapps.com/api/points');
+        $address2 = $this->apiAddress . '/api/points';
+        $res = $client2->request('GET', $address2);
         $res = json_decode($res->getBody(), true);
 
         Session::flash('Success', "You sumbitted point wth id " . $id);

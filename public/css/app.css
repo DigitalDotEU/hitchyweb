@@ -554,6 +554,72 @@ html {
   margin: 0;
 }
 
+#wrapper #page-content-wrapper .container .map .placesButtonsPanel {
+  position: absolute;
+  z-index: 0;
+  top: 50%;
+  text-align: right;
+  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  right: 50px;
+}
+
+#wrapper #page-content-wrapper .container .map .placesButtonsPanel #gasStationsBtn,
+#wrapper #page-content-wrapper .container .map .placesButtonsPanel #supermarketBtn,
+#wrapper #page-content-wrapper .container .map .placesButtonsPanel #trainStationsBtn,
+#wrapper #page-content-wrapper .container .map .placesButtonsPanel #bankBtn {
+  /*p{
+                            margin: 0;
+                            font-weight: 700;
+                            width: 20px;
+                            text-align: center;
+                        }*/
+}
+
+#wrapper #page-content-wrapper .container .map .placesButtonsPanel #gasStationsBtn p,
+#wrapper #page-content-wrapper .container .map .placesButtonsPanel #supermarketBtn p,
+#wrapper #page-content-wrapper .container .map .placesButtonsPanel #trainStationsBtn p,
+#wrapper #page-content-wrapper .container .map .placesButtonsPanel #bankBtn p {
+  display: inline-block;
+  margin-right: 20px;
+  border: 3px solid #e7e7e7;
+  background-color: #fff;
+  padding: 10px 40px;
+  display: none;
+  border-radius: 10px;
+}
+
+#wrapper #page-content-wrapper .container .map .placesButtonsPanel #gasStationsBtn .imageDiv,
+#wrapper #page-content-wrapper .container .map .placesButtonsPanel #supermarketBtn .imageDiv,
+#wrapper #page-content-wrapper .container .map .placesButtonsPanel #trainStationsBtn .imageDiv,
+#wrapper #page-content-wrapper .container .map .placesButtonsPanel #bankBtn .imageDiv {
+  padding: 15px;
+  border: 3px solid #e7e7e7;
+  background-color: #fff;
+  border-radius: 50%;
+  margin: 10px 0;
+  text-align: center;
+  width: 60px;
+  display: inline-block;
+}
+
+#wrapper #page-content-wrapper .container .map .placesButtonsPanel #gasStationsBtn .imageDiv img,
+#wrapper #page-content-wrapper .container .map .placesButtonsPanel #supermarketBtn .imageDiv img,
+#wrapper #page-content-wrapper .container .map .placesButtonsPanel #trainStationsBtn .imageDiv img,
+#wrapper #page-content-wrapper .container .map .placesButtonsPanel #bankBtn .imageDiv img {
+  width: 25px;
+}
+
+#wrapper #page-content-wrapper .container .map .placesButtonsPanel #gasStationsBtn .imageDiv:hover,
+#wrapper #page-content-wrapper .container .map .placesButtonsPanel #supermarketBtn .imageDiv:hover,
+#wrapper #page-content-wrapper .container .map .placesButtonsPanel #trainStationsBtn .imageDiv:hover,
+#wrapper #page-content-wrapper .container .map .placesButtonsPanel #bankBtn .imageDiv:hover {
+  -webkit-box-shadow: 0px 0px 30px 4px rgba(0, 0, 0, 0.35);
+  box-shadow: 0px 0px 30px 4px rgba(0, 0, 0, 0.35);
+  -webkit-transition-duration: .5s;
+          transition-duration: .5s;
+}
+
 #wrapper #page-content-wrapper .container .map .searchForm {
   position: absolute;
   z-index: 2;

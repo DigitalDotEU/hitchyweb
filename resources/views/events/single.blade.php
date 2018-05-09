@@ -109,13 +109,20 @@
             $('.eventAddress').append('<p>Stop point address: ' + results[0].formatted_address + '</p>');
         });
 
-        var myLatLng = new google.maps.LatLng(stopPlaceLattitude, stopPlaceLongitude);
-
-        //after click add new point create draggable marker to work with
+        //start place marker
         var marker = new google.maps.Marker({
-            position: myLatLng,
+            position: latlng1,
             map: map,
-            draggable: true
+            draggable: true,
+            icon: '../images/marker2.png'
+        });
+
+        //stop place marker
+        var marker = new google.maps.Marker({
+            position: latlng2,
+            map: map,
+            draggable: true,
+            icon: '../images/marker2.png'
         });
 
         //console.log(startPlaceLattitude);
@@ -140,6 +147,7 @@
             if (status == google.maps.DirectionsStatus.OK) {
                 directionsDisplay.setDirections(response);
                 directionsDisplay.setMap(map);
+                directionsDisplay.setOptions( { suppressMarkers: true } );
             } else {
                 console.log("Directions Request from " + start.toUrlValue(6) + " to " + end.toUrlValue(6) + " failed: " + status);
             }

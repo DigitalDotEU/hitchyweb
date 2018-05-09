@@ -17,12 +17,14 @@ class EventController extends Controller
     public function index(){
         //get all events which author==joinedUser
         $client = new Client();
-        $res = $client->request('GET', 'http://phplaravel-169259-488708.cloudwaysapps.com/api/events');
+        $address = $this->apiAddress . '/api/events';
+        $res = $client->request('GET', $address);
         $res = json_decode($res->getBody(), true);
 
         //get all events
         $client2 = new Client();
-        $res2 = $client2->request('GET', 'http://phplaravel-169259-488708.cloudwaysapps.com/api/allEvents');
+        $address2 = $this->apiAddress . '/api/allEvents';
+        $res2 = $client2->request('GET', $address2);
         $res2 = json_decode($res2->getBody(), true);
 
         $joinedUsers = array();
@@ -81,8 +83,9 @@ class EventController extends Controller
         $body['joinedUser'] = $request->input('joinedUser');
 
         $client = new \GuzzleHttp\Client();
+        $address = $this->apiAddress . '/api/events';
         try{
-            $response = $client->request('POST', 'http://phplaravel-169259-488708.cloudwaysapps.com/api/events', [
+            $response = $client->request('POST', $address, [
                 'headers' => ['Content-Type' => 'application/json'],
                 'body' => json_encode($body)
 
@@ -116,8 +119,9 @@ class EventController extends Controller
         $body['event_id'] = $request->input('event_id');
        
         $client = new \GuzzleHttp\Client();
+        $address = $this->apiAddress . '/api/eventComments';
         try{
-            $response = $client->request('POST', 'http://phplaravel-169259-488708.cloudwaysapps.com/api/eventComments', [
+            $response = $client->request('POST', $address, [
                 'headers' => ['Content-Type' => 'application/json'],
                 'body' => json_encode($body)
 
@@ -134,17 +138,20 @@ class EventController extends Controller
     public function show($id){
         //get event with $id = id
         $client = new Client();
-        $res = $client->request('GET', 'http://phplaravel-169259-488708.cloudwaysapps.com/api/events/' . $id);
+        $address = $this->apiAddress . '/api/events/';
+        $res = $client->request('GET', $address . $id);
         $res = json_decode($res->getBody(), true);
 
         //get all events
         $client2 = new Client();
-        $res2 = $client2->request('GET', 'http://phplaravel-169259-488708.cloudwaysapps.com/api/allEvents');
+        $address2 = $this->apiAddress . '/api/allEvents';
+        $res2 = $client2->request('GET', $address2);
         $res2 = json_decode($res2->getBody(), true);
 
         //get comments for event
         $client3 = new Client();
-        $res3 = $client3->request('GET', 'http://phplaravel-169259-488708.cloudwaysapps.com/api/eventComments/' . $id);
+        $address3 = $this->apiAddress . '/api/eventComments/';
+        $res3 = $client3->request('GET', $address3 . $id);
         $res3 = json_decode($res3->getBody(), true);
         
         $joinedUsers = array();
@@ -160,7 +167,8 @@ class EventController extends Controller
             [
                 'eventAfterLoad' => '',
                 'eventBeforeLoad' => 'eventPoint(map);',
-                'zoom' => 8
+                'zoom' => 8,
+                'marker' => false
             ]
         );
 
