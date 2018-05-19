@@ -564,7 +564,7 @@ html { height: 100%;}
                     #gasStationsBtn .imageDiv:hover, #supermarketBtn .imageDiv:hover, #trainStationsBtn .imageDiv:hover, #bankBtn .imageDiv:hover{
                         -webkit-box-shadow: 0px 0px 30px 4px rgba(0, 0, 0, 0.35);
                         box-shadow: 0px 0px 30px 4px rgba(0, 0, 0, 0.35);
-                        transition-duration: .5s;
+                        transition-duration: .3s;
                     }
                 }
         
@@ -572,6 +572,7 @@ html { height: 100%;}
                     position: absolute;
                     z-index: 2;
                     width: 40%;
+                    text-align: center;
                     margin: 50px 30% 0 30%;
         
                     #location{
@@ -579,6 +580,14 @@ html { height: 100%;}
                         -moz-box-shadow: 0px 0px 30px 4px rgba(0,0,0,0.35);
                         box-shadow: 0px 0px 30px 4px rgba(0,0,0,0.35);
                         padding: 25px;
+                    }
+                    #searchThisRegion{
+                        margin-top: 20px;
+                        color: #fff;
+                        background-color: #88ccfb;
+                        font-weight: 300;
+                        padding: 10px 40px;
+                        font-weight: 400;
                     }
                 }
         

@@ -6,6 +6,8 @@
     <div class="searchForm">
         <div class="form-group">
             <input type="text" class="form-control" id="location" value="" placeholder="Search location...">
+
+            <div id="searchThisRegion" class="btn btn-default">SEARCH THIS REGION</div>
         </div>
     </div>
 
@@ -163,6 +165,13 @@
           anchorPoint: new google.maps.Point(0, -29)
         });
 
+
+        // Deletes all markers in the array by removing references to them.
+        function deleteMarkers() {
+            clearMarkers();
+            markers = [];
+        }
+
         autocomplete.addListener('place_changed', function() {
           marker.setVisible(false);
           var place = autocomplete.getPlace();
@@ -191,6 +200,127 @@
           }
         });
 
+
+        /* ==========================================
+
+                    SEARCH THIS REGION BUTTON 
+
+        ===========================================*/
+        $('#searchThisRegion').click(function(){
+            console.log("search");
+
+            var ctr = map.getCenter();
+            var lt = ctr.lat();
+            var lng = ctr.lng();
+
+            ltAdd = lt - 0.00005;
+            lngAdd = lng - 0.00005;
+
+            //console.log(lt + ", " + lng);
+
+            //define range where search point
+            urlApi = 'http://hitchwiki.org/maps/api/?bounds=' + lt + "," + lng + "," + ltAdd + "," + lngAdd + "&callback=?";
+            console.log(urlApi);
+
+            //get json with points list data in region
+            $.ajax({
+                type: "GET",
+                url: urlApi,
+                contentType: "application/json; charset=utf-8",
+                async: false,
+                dataType: "json",
+                success: function (data, textStatus, jqXHR) {
+                    //console.log(data);
+
+                    //it only return id,coordinates and voting so you need to get info for every id
+                    for (var i = 0; i < data.length; i++) {
+                        //console.log(data[i].id);
+        
+                        let pointUrlApi = 'http://hitchwiki.org/maps/api/?place=' + data[i].id + "&callback=?";
+
+                        $.ajax({
+                            type: "GET",
+                            url: pointUrlApi,
+                            contentType: "application/json; charset=utf-8",
+                            async: false,
+                            dataType: "json",
+                            success: function (singleData, textStatus, jqXHR) {
+                                console.log(singleData);
+
+                                let LatLng = {lat: Number(singleData.lat), lng: Number(singleData.lon)};
+
+                                let marker = new google.maps.Marker({
+                                    position: LatLng,
+                                    map: map,
+                                    draggable: true,
+                                    icon: '../images/marker2.png'
+                                });
+
+                                //init infoWindow
+                                let infowindow = new google.maps.InfoWindow();
+
+                                google.maps.event.addListener(marker, 'click', function() {
+                                    //infowindow.setContent(singleData.description['en_UK'].description);
+                                    //infowindow.open(map, marker);
+
+                                    //$('#point_id').val('' . $id . '');
+                                    $('#closePanel').remove();
+                                    $('.loginInfo').css('display', 'none');
+                                    $(".logedInfo").css('display', 'none'); 
+                                    $(".searchForm").css('display', 'none');
+
+                                    $('.panel2').css('display', 'none');
+                                    $('#addPointBtn').css('display', 'none');
+                                    $('.panel').css('display', 'block');
+
+                                    $('.panelPointHeader').empty();
+                                    $('.panelPointAddress').empty();
+                                    $('.panelComments').empty();
+                                    $('.panelContent').empty();  
+
+                                    $('.panelPointHeader').append('<h1 class="pointName">' + singleData.location.country['name'] + ' ' + singleData.id + '</h1>');
+                                    $('.panelPointHeader').append('<p>' + singleData.description['en_UK'].description + '</p>');
+
+                                    
+                                    /*var lat = ' . $lat . ';
+                                    var lng = ' . $lng .';
+                                    geocoder2 = new google.maps.Geocoder();
+                                    var latlng = new google.maps.LatLng(lat, lng);
+                                    geocoder2.geocode({
+                                        'latLng': latlng
+                                    }, function(results, status) {
+                                        $('.panelPointAddress').append('<p>Address: ' + results[4].formatted_address + '</p>');
+                                    });*/
+
+                                    $('.panelContent').append('<p>Rating: ' + singleData.rating + '</p>');
+                    
+                                    $('.panelContent').append('<p>Created by: ' + singleData.user['name'] + '</p>');
+
+                                    //$('.panelComments').append('<h3>Comments:</h3>');
+                                    //$('.panelComments').append('' . $commentToPost . '');
+
+                                    $('.panel').append('<div id="closePanel"><i class="fas fa-times"></i></div>');
+                                    $('#closePanel').click(function(){ $(".logedInfo").css('display', 'block'); $(".searchForm").css('display', 'block'); $('.panel').css('display', 'none'); $('.loginInfo').css('display', 'block'); $('#addPointBtn').css('display', 'block');}); 
+                                });
+                                
+                            },
+                            error: function (errorMessage) {
+                                console.log(errorMessage);
+                            }
+                        });
+
+                }
+            },
+            error: function (errorMessage) {
+                console.log(errorMessage);
+            }
+        });
+
+
+
+
+
+        });
 
 
         /* ==========================================
@@ -408,6 +538,7 @@
 
         //add new point based on user click map position when user click on map-canvas-0
         document.getElementById('map-canvas-0').onclick = function(){
+            $('.logininfo').css('display', 'none');
             $( "#addPointBtn" ).css('display', 'block');
             //get cursor position on map 
             //when user click addPointBtn create draggable marker and update lat and lng when user drag marker, dont display plus button to prevent 
