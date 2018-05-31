@@ -805,6 +805,11 @@ html {
   min-width: 200px;
 }
 
+#wrapper #page-content-wrapper .container .welcome .welcomeText {
+  width: 70%;
+  margin: 40px auto;
+}
+
 #wrapper #page-content-wrapper .container .profile {
   width: 100vw;
   height: 100vh;
@@ -832,6 +837,51 @@ html {
 #wrapper.toggled #page-content-wrapper {
   position: absolute;
   margin-right: -220px;
+}
+
+@media only screen and (max-width: 480px) {
+  .loginInfo {
+    display: none !important;
+  }
+
+  #wrapper #page-content-wrapper .container .map .searchForm {
+    width: 60%;
+    margin: 50px 20% 0 20%;
+  }
+
+  #wrapper #page-content-wrapper .container .map .searchForm #searchThisRegion {
+    padding: 10px 20px;
+  }
+
+  #wrapper #page-content-wrapper .container .map .placesButtonsPanel {
+    right: 10px;
+  }
+
+  #wrapper #page-content-wrapper .container .map .panel {
+    width: 100%;
+    top: 50%;
+    bottom: unset;
+  }
+
+  .eventSingleCol {
+    position: absolute !important;
+    top: 70vh;
+    z-index: 2;
+    background-color: #fff;
+  }
+
+  .eventPointMap {
+    position: absolute !important;
+    top: 0;
+  }
+
+  .welcomeText {
+    width: 80% !important;
+  }
+
+  .welcome {
+    margin: 0 !important;
+  }
 }
 
 .navbar-laravel {
